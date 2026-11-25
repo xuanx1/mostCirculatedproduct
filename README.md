@@ -1,8 +1,7 @@
-# Most Circulated Product: banknote security features
+# Most Circulated Product: 10 Top Traded Currencies in the World
 
-Interactive, educational explorers of the security features on the highest-denomination banknote of each of the ten most traded currencies (by the BIS Triennial Central Bank Survey of foreign exchange turnover). Tilt, flip, bend, fold, explode into layers and view under ultraviolet light, with every feature labelled and explained.
+Interactive, educational explorers of the security features on the highest-denomination [banknote](https://xuanx1.github.io/mostCirculatedproduct/) of each of the ten most traded currencies (by the BIS Triennial Central Bank Survey of foreign exchange turnover). Tilt, flip, bend, fold, explode into layers and view under ultraviolet light, with every feature labelled and explained.
 
-Landing page: [xuanx1.github.io/mostCirculatedproduct](https://xuanx1.github.io/mostCirculatedproduct/)
 
 | Currency | Note | Live page | Folder | Status |
 |---|---|---|---|---|
@@ -15,7 +14,8 @@ Landing page: [xuanx1.github.io/mostCirculatedproduct](https://xuanx1.github.io/
 | Australian dollar | $100 (polymer, next generation) | | `aud-100/` | Planned |
 | Canadian dollar | $100 (polymer, Frontier series) | | `cad-100/` | Planned |
 | Hong Kong dollar | HK$1,000 (2018 series) ² | | `hkd-1000/` | Planned |
-| Singapore dollar | S$10,000 (Portrait Series) ¹ | [sgd-10000](https://xuanx1.github.io/mostCirculatedproduct/sgd-10000/) | [`sgd-10000/`](sgd-10000/) | Live |
+| Singapore dollar | S$10,000 (Portrait Series) ¹ <img width="1920" height="915" alt="Screenshot 2026-11-26 004911" src="https://github.com/user-attachments/assets/7a32377a-8093-4ce8-8df2-114273f80f0d" />
+| [sgd-10000](https://xuanx1.github.io/mostCirculatedproduct/sgd-10000/) | [`sgd-10000/`](sgd-10000/) | Live |
 
 ¹ Still legal tender but no longer issued: the €500 since 2019, the S$10,000 since 2014. They remain the highest denominations of their currencies.
 ² Hong Kong notes are issued by three banks (HSBC, Standard Chartered, Bank of China), each with its own design.
