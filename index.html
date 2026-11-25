@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Most Circulated Product: banknote security features</title>
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box}
+  body{margin:0;min-height:100vh;display:grid;place-items:center;padding:48px 24px;
+    font-family:'Source Sans 3', system-ui, sans-serif;color:#1d2430;
+    background:radial-gradient(1200px 800px at 30% 20%, #f6f3ea 0%, #e9eef0 70%)}
+  main{width:min(980px,100%)}
+  .eyebrow{margin:0 0 10px;font-size:12px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:#6b6f78}
+  h1{margin:0 0 14px;font-size:clamp(30px,4.5vw,48px);line-height:1.05;letter-spacing:-.01em}
+  p.lead{margin:0 0 36px;max-width:640px;font-size:17px;line-height:1.6;color:#4a5160}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px}
+  a.card{display:block;text-decoration:none;color:inherit;border-radius:14px;overflow:hidden;
+    border:1px solid rgba(29,36,48,.12);background:#fff;transition:transform .25s ease, box-shadow .25s ease}
+  a.card:hover, a.card:focus-visible{transform:translateY(-3px);box-shadow:0 18px 40px -18px rgba(29,36,48,.35)}
+  a.card:focus-visible{outline:2px solid #1d2430;outline-offset:3px}
+  .thumb{aspect-ratio:2.2/1;background-size:cover;background-position:center}
+  .sgd .thumb{background-image:url(sgd-10000/sgd-10k-front.png);background-color:#020e50}
+  .usd .thumb{background-image:url(usd-100/usd-100-front.png);background-color:#f3f7f3}
+  .body{padding:18px 20px 22px;border-top:4px solid var(--c)}
+  .sgd{--c:#c29c63}
+  .usd{--c:#1f7a4a}
+  .body h2{margin:0 0 6px;font-size:22px}
+  .body p{margin:0;font-size:14.5px;line-height:1.5;color:#4a5160}
+  .go{display:inline-block;margin-top:14px;font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--c)}
+  footer{margin-top:36px;font-size:12.5px;line-height:1.6;color:#6b6f78}
+  footer a{color:inherit}
+</style>
+</head>
+<body>
+<main>
+  <p class="eyebrow">Banknote security features</p>
+  <h1>The most circulated product.</h1>
+  <p class="lead">Two interactive notes. Tilt them, flip them, bend and fold them, pull them apart into layers and look at them under ultraviolet light, with every security feature labelled and explained.</p>
+  <div class="grid">
+    <a class="card sgd" href="sgd-10000/index.html">
+      <div class="thumb" role="img" aria-label="Singapore $10,000 note"></div>
+      <div class="body">
+        <h2>Singapore S$10,000</h2>
+        <p>Portrait Series, 1999. Kinegram foil, colour-shift ink, see-through register, latent image and more.</p>
+        <span class="go">Explore →</span>
+      </div>
+    </a>
+    <a class="card usd" href="usd-100/index.html">
+      <div class="thumb" role="img" aria-label="US $100 note"></div>
+      <div class="body">
+        <h2>US $100</h2>
+        <p>Federal Reserve note, Series 2021. 3-D Security Ribbon, Bell in the Inkwell, colour-shifting 100 and more.</p>
+        <span class="go">Explore →</span>
+      </div>
+    </a>
+  </div>
+  <footer>For education about anti-counterfeiting features. Note images are reproductions for illustration only and are not legal tender.
+    Source: <a href="https://github.com/xuanx1/mostCirculatedproduct">github.com/xuanx1/mostCirculatedproduct</a></footer>
+</main>
+</body>
+</html>

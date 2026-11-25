@@ -1,0 +1,12 @@
+# large editing files: the pages don't need them (GitHub rejects files over 100 MB)
+*.psd
+.backup-*/
+**/source/previous/
+**/source/*-esrgan-x2.png
+
+# build caches
+__pycache__/
+*.pyc
+assets/masks/
+.DS_Store
+Thumbs.db
