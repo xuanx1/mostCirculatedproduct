@@ -1,5 +1,7 @@
 # [Most Circulated Product](https://xuanx1.github.io/mostCirculatedproduct/)
 
+<img width="1901" height="1080" alt="Screenshot 2026-11-28 145927" src="https://github.com/user-attachments/assets/e26fafba-b753-43a3-acc4-fc2a27f359a6" />
+
 Interactive, educational [explorers](https://xuanx1.github.io/mostCirculatedproduct/) of the security features on the highest-denomination banknote of each of the ten most traded currencies (by the BIS Triennial Central Bank Survey of foreign exchange turnover). Tilt, flip, bend, fold, explode into layers and view under ultraviolet light, with every feature labelled and explained.
 
 | Currency | Note | Live page | Preview |
