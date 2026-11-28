@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Swiss 1000-Franc Note — Security Features</title>
+<link rel="stylesheet" href="fonts/fonts.css">
+<link rel="stylesheet" href="assets/masks.css"><!-- effect masks as data URIs: work from file:// too -->
+<link rel="stylesheet" href="styles.css">
+</head>
+<body class="intro">
+  <!-- opening cover -->
+  <div class="intro-cover" id="introCover" aria-hidden="true">
+    <div class="intro-inner">
+      <div class="intro-title"><span class="amt">CHF 1000</span><span class="series">Ninth Series</span></div>
+      <div class="intro-stack" id="introStack">
+        <span lang="de">Schweizerische Nationalbank</span><span lang="fr">Banque nationale suisse</span><span lang="it">Banca nazionale svizzera</span><span lang="rm">Banca naziunala svizra</span>
+      </div>
+    </div>
+  </div>
+  <div class="backdrop" aria-hidden="true"></div>
+  <div class="backdrop-script" aria-hidden="true"></div>   <!-- the note's own open network (SNB brochure artwork) -->
+  <div class="scrim" aria-hidden="true"></div>
+
+  <!-- ===== Masthead ===== -->
+  <header class="masthead">
+    <div class="brand">
+      <p class="eyebrow">Security Features <span class="dot">·</span> Swiss National Bank <span class="dot">·</span> Ninth series</p>
+      <div class="title-row">
+      <h1><span class="amt">CHF 1000</span><span class="series">Ninth Series</span></h1>
+      <p class="strap">
+        <span lang="de">Tausend Franken</span><span lang="fr">Mille Francs</span><span lang="it">Mille Franchi</span><span lang="rm">Milli Francs</span>
+      </p>
+      </div>
+    </div>
+
+    <nav class="views" id="viewSeg" aria-label="View">
+      <button class="active" data-view="front">
+        <span class="lbl">Front</span>
+        <em class="alt">Handshake · Globe</em>
+      </button>
+      <button data-view="back">
+        <span class="lbl">Back</span>
+        <em class="alt">Parliament · Network</em>
+      </button>
+      <button data-view="uv">
+        <span class="lbl">Ultraviolet</span>
+        <em class="alt">Under a UV lamp</em>
+      </button>
+    </nav>
+  </header>
+
+  <!-- ===== Left column: layer index (exploded view) ===== -->
+  <aside class="col col-left">
+    <nav class="layer-rail" id="layerRail" aria-label="Note layers">
+      <h2 class="col-head"><span>Layers</span><span class="tally">Front · Durasafe · Back</span></h2>
+      <div id="layerRailList"></div>
+      <p class="rail-note">Hover a layer to isolate it. Click to pin it.</p>
+    </nav>
+  </aside>
+
+  <!-- ===== Stage ===== -->
+  <figure class="print-note" aria-hidden="true"><img src="chf-1000-front.png" alt="Swiss 1000-franc note, front (specimen)"></figure>
+  <main class="stage" id="stage">
+    <div class="note-wrap" id="noteWrap">
+      <div class="note" id="note">
+        <div class="face front note-front">
+          <img class="art" src="chf-1000-front.png" alt="Swiss 1000-franc note, front (specimen)" draggable="false">
+          <!-- the two watermarks (Swiss flag, globe), formed in the paper -->
+          <div class="ghost-fix" aria-hidden="true"><img src="assets/layers/watermark-ghost.png" alt="" draggable="false"></div>
+        </div>
+        <div class="face back note-back">
+          <img class="art" src="chf-1000-back.png" alt="Swiss 1000-franc note, back (specimen)" draggable="false">
+          <!-- the same watermarks seen from behind: mirrored image, mirrored position -->
+          <div class="ghost-fix mirror" aria-hidden="true"><img src="assets/layers/watermark-ghost.png" alt="" draggable="false"></div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ===== Right column: detail ===== -->
+  <aside class="col col-right">
+    <article class="detail" id="detailCard" aria-live="polite"></article>
+  </aside>
+
+  <!-- ===== Footer: readout · toolbar · specimen ===== -->
+  <footer class="footbar">
+    <div class="readout">
+      <span class="k">Viewing angle</span>
+      <span class="v" id="angleReadout">0°</span>
+    </div>
+
+    <div class="toolbar" role="toolbar" aria-label="Note controls">
+      <button class="tb" id="flipBtn" title="Flip (F)">
+        <svg viewBox="0 0 24 24"><path d="M7 4v16M17 4v16M7 12h10M13 8l4 4-4 4"/></svg><span>Flip</span>
+      </button>
+      <button class="tb" id="foldBtn" aria-pressed="false" title="Fold in half (G)">
+        <svg viewBox="0 0 24 24"><path d="M3 6l9 3v11l-9-3zM12 9l9-3v11l-9 3"/></svg><span>Fold</span>
+      </button>
+      <button class="tb" id="explodeBtn" aria-pressed="false" title="Explode into layers (E)">
+        <svg viewBox="0 0 24 24"><path d="M4 8l8-4 8 4-8 4zM4 13l8 4 8-4M4 18l8 4 8-4"/></svg><span>Explode</span>
+      </button>
+      <button class="tb" id="autoBtn" title="Auto-rotate (Space)">
+        <svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-3-6.2M20 4v5h-5"/></svg><span>Rotate</span>
+      </button>
+      <button class="tb" id="allBtn" aria-pressed="false" title="Light up every feature">
+        <svg viewBox="0 0 24 24"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1"/><circle cx="12" cy="12" r="3"/></svg><span>Reveal all</span>
+      </button>
+      <span class="tb-sep"></span>
+      <label class="tb-slider"><span>Bend</span><input type="range" id="bendSlider" min="-170" max="170" value="0"></label>
+      <label class="tb-slider"><span>Zoom</span><input type="range" id="zoomSlider" min="60" max="220" value="100"></label>
+      <span class="tb-sep"></span>
+      <button class="tb" id="resetBtn" title="Reset (R)">
+        <svg viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 2.6-5.9M4 4v5h5"/></svg><span>Reset</span>
+      </button>
+    </div>
+
+    <dl class="specs">
+      <div><dt>Size</dt><dd>70 × 158 mm</dd></div>
+      <div><dt>Substrate</dt><dd>Durasafe®</dd></div>
+      <div><dt>Issued</dt><dd>13 Mar 2019</dd></div>
+    </dl>
+  </footer>
+
+  <div class="cursor-tag" id="cursorTag" aria-hidden="true"></div>
+
+<!-- plain scripts (not modules) so the page also opens straight from disk via file:// -->
+<script src="assets/boxes.js" defer></script>
+<script src="data.js" defer></script>
+<script src="script.js" defer></script>
+</body>
+</html>

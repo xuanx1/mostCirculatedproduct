@@ -1,0 +1,122 @@
+{
+ "front-numeral": [
+  10,
+  10,
+  208,
+  80
+ ],
+ "front-shimmer": [
+  546,
+  14,
+  114,
+  98
+ ],
+ "front-thread": [
+  449,
+  52,
+  34,
+  256
+ ],
+ "front-seethrough": [
+  526,
+  256,
+  144,
+  56
+ ],
+ "front-seethrough-uv-a": [
+  526,
+  256,
+  144,
+  56
+ ],
+ "front-seethrough-uv-b": [
+  526,
+  256,
+  144,
+  56
+ ],
+ "back-seethrough": [
+  46,
+  256,
+  142,
+  56
+ ],
+ "back-seethrough-uv-a": [
+  46,
+  256,
+  142,
+  56
+ ],
+ "back-seethrough-uv-b": [
+  46,
+  256,
+  142,
+  56
+ ],
+ "front-serial-h": [
+  41,
+  259,
+  108,
+  22
+ ],
+ "front-serial-v": [
+  667,
+  124,
+  23,
+  127
+ ],
+ "front-signature": [
+  54,
+  174,
+  76,
+  32
+ ],
+ "front-braille": [
+  42,
+  284,
+  112,
+  24
+ ],
+ "front-tactile-l": [
+  0,
+  128,
+  25,
+  181
+ ],
+ "front-tactile-r": [
+  694,
+  134,
+  26,
+  175
+ ],
+ "watermark-ghost": [
+  502.65,
+  126.34,
+  168.78,
+  102.47
+ ],
+ "front-latent": [
+  355,
+  252,
+  92,
+  40
+ ],
+ "front-lion": [
+  160,
+  46,
+  270,
+  226
+ ],
+ "front-mane": [
+  160,
+  46,
+  270,
+  226
+ ],
+ "back-metropolis": [
+  262,
+  0,
+  334,
+  320
+ ]
+}

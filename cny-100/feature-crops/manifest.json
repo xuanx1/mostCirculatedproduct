@@ -1,0 +1,493 @@
+{
+  "note_space": [
+    720,
+    320
+  ],
+  "sources": {
+    "front": "cny-100-front.png",
+    "back": "cny-100-back.png"
+  },
+  "crops": [
+    {
+      "id": "portrait",
+      "side": "front",
+      "label": "Portrait of Mao Zedong (intaglio)",
+      "shape": "poly",
+      "note_box": [
+        334,
+        0,
+        339,
+        318
+      ],
+      "source_px": [
+        1438,
+        0,
+        2898,
+        1530
+      ],
+      "size_px": {
+        "cutout": [
+          1334,
+          1426
+        ],
+        "ink": [
+          1342,
+          1452
+        ]
+      },
+      "paper_rgb": [
+        248,
+        248,
+        248
+      ],
+      "files": {
+        "cutout": "front/portrait.png",
+        "ink": "front/portrait-ink.png"
+      }
+    },
+    {
+      "id": "ovmi",
+      "side": "front",
+      "label": "Colour-shifting numeral 100 (OVMI)",
+      "shape": "rect",
+      "note_box": [
+        185,
+        77,
+        188,
+        93
+      ],
+      "source_px": [
+        797,
+        371,
+        1606,
+        818
+      ],
+      "size_px": {
+        "cutout": [
+          690,
+          310
+        ],
+        "ink": [
+          707,
+          331
+        ]
+      },
+      "paper_rgb": [
+        248,
+        248,
+        248
+      ],
+      "files": {
+        "cutout": "front/ovmi.png",
+        "ink": "front/ovmi-ink.png"
+      }
+    },
+    {
+      "id": "thread",
+      "side": "front",
+      "label": "Colour-shifting windowed security thread",
+      "shape": "rect",
+      "note_box": [
+        573,
+        0,
+        59,
+        265
+      ],
+      "source_px": [
+        2467,
+        0,
+        2721,
+        1275
+      ],
+      "size_px": {
+        "cutout": [
+          134,
+          1158
+        ],
+        "ink": [
+          156,
+          1178
+        ]
+      },
+      "paper_rgb": [
+        248,
+        248,
+        248
+      ],
+      "files": {
+        "cutout": "front/thread.png",
+        "ink": "front/thread-ink.png"
+      }
+    },
+    {
+      "id": "emblem",
+      "side": "front",
+      "label": "National Emblem (intaglio)",
+      "shape": "ellipse",
+      "note_box": [
+        8,
+        1,
+        104,
+        102
+      ],
+      "source_px": [
+        34,
+        5,
+        482,
+        496
+      ],
+      "size_px": {
+        "cutout": [
+          328,
+          353
+        ],
+        "ink": [
+          343,
+          334
+        ]
+      },
+      "paper_rgb": [
+        248,
+        248,
+        248
+      ],
+      "files": {
+        "cutout": "front/emblem.png",
+        "ink": "front/emblem-ink.png"
+      }
+    },
+    {
+      "id": "bank-name",
+      "side": "front",
+      "label": "Issuer name, People's Bank of China (intaglio)",
+      "shape": "rect",
+      "note_box": [
+        134,
+        2,
+        285,
+        70
+      ],
+      "source_px": [
+        577,
+        10,
+        1804,
+        346
+      ],
+      "size_px": {
+        "cutout": [
+          1107,
+          199
+        ],
+        "ink": [
+          1129,
+          221
+        ]
+      },
+      "paper_rgb": [
+        248,
+        248,
+        248
+      ],
+      "files": {
+        "cutout": "front/bank-name.png",
+        "ink": "front/bank-name-ink.png"
+      }
+    },
+    {
+      "id": "numeral",
+      "side": "front",
+      "label": "Upper-right numeral 100 (intaglio)",
+      "shape": "rect",
+      "note_box": [
+        642,
+        0,
+        74,
+        117
+      ],
+      "source_px": [
+        2764,
+        0,
+        3083,
+        563
+      ],
+      "size_px": {
+        "cutout": [
+          199,
+          425
+        ],
+        "ink": [
+          220,
+          433
+        ]
+      },
+      "paper_rgb": [
+        248,
+        248,
+        248
+      ],
+      "files": {
+        "cutout": "front/numeral.png",
+        "ink": "front/numeral-ink.png"
+      }
+    },
+    {
+      "id": "braille",
+      "side": "front",
+      "label": "Braille denomination mark (intaglio)",
+      "shape": "rect",
+      "note_box": [
+        580,
+        256,
+        131,
+        62
+      ],
+      "source_px": [
+        2497,
+        1232,
+        3061,
+        1530
+      ],
+      "size_px": {
+        "cutout": [
+          444,
+          161
+        ],
+        "ink": [
+          453,
+          168
+        ]
+      },
+      "paper_rgb": [
+        248,
+        248,
+        248
+      ],
+      "files": {
+        "cutout": "front/braille.png",
+        "ink": "front/braille-ink.png"
+      }
+    },
+    {
+      "id": "serial-h",
+      "side": "front",
+      "label": "Horizontal serial number",
+      "shape": "rect",
+      "note_box": [
+        2,
+        213,
+        172,
+        58
+      ],
+      "source_px": [
+        9,
+        1025,
+        749,
+        1304
+      ],
+      "size_px": {
+        "cutout": [
+          621,
+          141
+        ],
+        "ink": [
+          584,
+          104
+        ]
+      },
+      "paper_rgb": [
+        248,
+        248,
+        248
+      ],
+      "files": {
+        "cutout": "front/serial-h.png",
+        "ink": "front/serial-h-ink.png"
+      }
+    },
+    {
+      "id": "serial-v",
+      "side": "front",
+      "label": "Vertical serial number (blue)",
+      "shape": "rect",
+      "note_box": [
+        644,
+        94,
+        58,
+        172
+      ],
+      "source_px": [
+        2773,
+        452,
+        3022,
+        1280
+      ],
+      "size_px": {
+        "cutout": [
+          130,
+          690
+        ],
+        "ink": [
+          137,
+          680
+        ]
+      },
+      "paper_rgb": [
+        248,
+        248,
+        248
+      ],
+      "files": {
+        "cutout": "front/serial-v.png",
+        "ink": "front/serial-v-ink.png"
+      }
+    },
+    {
+      "id": "register",
+      "side": "front",
+      "label": "See-through numeral, obverse part",
+      "shape": "rect",
+      "note_box": [
+        8,
+        248,
+        100,
+        66
+      ],
+      "source_px": [
+        34,
+        1194,
+        465,
+        1511
+      ],
+      "size_px": {
+        "cutout": [
+          311,
+          180
+        ],
+        "ink": [
+          279,
+          142
+        ]
+      },
+      "paper_rgb": [
+        248,
+        248,
+        248
+      ],
+      "files": {
+        "cutout": "front/register.png",
+        "ink": "front/register-ink.png"
+      }
+    },
+    {
+      "id": "micro",
+      "side": "front",
+      "label": "Microprinting RMB / RMB100 (top oval pattern)",
+      "shape": "ellipse",
+      "note_box": [
+        66,
+        4,
+        104,
+        88
+      ],
+      "source_px": [
+        284,
+        19,
+        732,
+        443
+      ],
+      "size_px": {
+        "cutout": [
+          328,
+          286
+        ],
+        "ink": [
+          344,
+          276
+        ]
+      },
+      "paper_rgb": [
+        248,
+        248,
+        248
+      ],
+      "files": {
+        "cutout": "front/micro.png",
+        "ink": "front/micro-ink.png"
+      }
+    },
+    {
+      "id": "hall",
+      "side": "back",
+      "label": "Great Hall of the People (intaglio)",
+      "shape": "poly",
+      "note_box": [
+        116,
+        117.5,
+        414,
+        113.5
+      ],
+      "source_px": [
+        499,
+        565,
+        2282,
+        1112
+      ],
+      "size_px": {
+        "cutout": [
+          1659,
+          404
+        ],
+        "ink": [
+          1683,
+          430
+        ]
+      },
+      "paper_rgb": [
+        254,
+        255,
+        255
+      ],
+      "files": {
+        "cutout": "back/hall.png",
+        "ink": "back/hall-ink.png"
+      }
+    },
+    {
+      "id": "register",
+      "side": "back",
+      "label": "See-through numeral, reverse part",
+      "shape": "rect",
+      "note_box": [
+        614,
+        252,
+        102,
+        66
+      ],
+      "source_px": [
+        2644,
+        1213,
+        3083,
+        1530
+      ],
+      "size_px": {
+        "cutout": [
+          319,
+          180
+        ],
+        "ink": [
+          298,
+          167
+        ]
+      },
+      "paper_rgb": [
+        250,
+        255,
+        255
+      ],
+      "files": {
+        "cutout": "back/register.png",
+        "ink": "back/register-ink.png"
+      }
+    }
+  ]
+}

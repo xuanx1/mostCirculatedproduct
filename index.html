@@ -4,59 +4,409 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Most Circulated Product: banknote security features</title>
+<meta name="description" content="Interactive explorers of the security features on the highest-denomination banknote of each of the ten most traded currencies." />
 <style>
-  :root{color-scheme:light}
+  @font-face{font-family:'Bodoni Moda';src:url(fonts/bodoni-moda-latin.woff2) format('woff2');font-weight:400 900;font-display:swap}
+  @font-face{font-family:'Source Sans 3';src:url(fonts/source-sans-3-latin.woff2) format('woff2');font-weight:200 900;font-display:swap}
+  @font-face{font-family:'Source Serif 4';src:url(fonts/source-serif-4-italic-latin.woff2) format('woff2');font-style:italic;font-weight:200 900;font-display:swap}
+  @font-face{font-family:'IBM Plex Mono';src:url(fonts/ibm-plex-mono-400-latin.woff2) format('woff2');font-weight:400;font-display:swap}
+
+  :root{
+    --bg:#0d0f12; --bg-2:#14171c; --ink:#efe9dd; --ink-2:rgba(239,233,221,.62); --ink-3:rgba(239,233,221,.36);
+    --hair:rgba(239,233,221,.12); --gold:#c9a86a;
+    --serif:'Bodoni Moda', Didot, 'Times New Roman', serif; --italic:'Source Serif 4', Georgia, serif;
+    --sans:'Source Sans 3', system-ui, sans-serif; --mono:'IBM Plex Mono', ui-monospace, monospace;
+    --ease:cubic-bezier(.2,.7,.2,1); --pad:clamp(20px, 4.5vw, 72px);
+    color-scheme:dark;
+  }
   *{box-sizing:border-box}
-  body{margin:0;min-height:100vh;display:grid;place-items:center;padding:48px 24px;
-    font-family:'Source Sans 3', system-ui, sans-serif;color:#1d2430;
-    background:radial-gradient(1200px 800px at 30% 20%, #f6f3ea 0%, #e9eef0 70%)}
-  main{width:min(980px,100%)}
-  .eyebrow{margin:0 0 10px;font-size:12px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:#6b6f78}
-  h1{margin:0 0 14px;font-size:clamp(30px,4.5vw,48px);line-height:1.05;letter-spacing:-.01em}
-  p.lead{margin:0 0 36px;max-width:640px;font-size:17px;line-height:1.6;color:#4a5160}
-  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px}
-  a.card{display:block;text-decoration:none;color:inherit;border-radius:14px;overflow:hidden;
-    border:1px solid rgba(29,36,48,.12);background:#fff;transition:transform .25s ease, box-shadow .25s ease}
-  a.card:hover, a.card:focus-visible{transform:translateY(-3px);box-shadow:0 18px 40px -18px rgba(29,36,48,.35)}
-  a.card:focus-visible{outline:2px solid #1d2430;outline-offset:3px}
-  .thumb{aspect-ratio:2.2/1;background-size:cover;background-position:center}
-  .sgd .thumb{background-image:url(sgd-10000/sgd-10k-front.png);background-color:#020e50}
-  .usd .thumb{background-image:url(usd-100/usd-100-front.png);background-color:#f3f7f3}
-  .body{padding:18px 20px 22px;border-top:4px solid var(--c)}
-  .sgd{--c:#c29c63}
-  .usd{--c:#1f7a4a}
-  .body h2{margin:0 0 6px;font-size:22px}
-  .body p{margin:0;font-size:14.5px;line-height:1.5;color:#4a5160}
-  .go{display:inline-block;margin-top:14px;font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--c)}
-  footer{margin-top:36px;font-size:12.5px;line-height:1.6;color:#6b6f78}
-  footer a{color:inherit}
+  html{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);overflow-x:hidden}
+  a{color:inherit}
+  ::selection{background:var(--gold);color:var(--bg)}
+
+  /* faint guilloche rosette behind the hero, drawn in SVG */
+  .bg{position:fixed;inset:0;pointer-events:none;z-index:0;
+    background:radial-gradient(1100px 700px at 78% -10%, rgba(201,168,106,.13), transparent 60%),
+               radial-gradient(900px 600px at -10% 110%, rgba(90,120,170,.10), transparent 60%)}
+  [data-par]{will-change:transform}
+  .bg svg{position:absolute;right:-12vw;top:-18vw;width:72vw;max-width:1100px;opacity:.16}
+  .grain{position:fixed;inset:-50%;pointer-events:none;z-index:1;opacity:.05;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+
+  .wrap{position:relative;z-index:2;padding:0 var(--pad)}
+
+  /* top bar */
+  .top{display:flex;justify-content:space-between;align-items:center;padding:26px 0 0;
+    font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2)}
+  .top .mark{display:flex;align-items:center;gap:12px;color:var(--ink)}
+  .top .mark i{width:22px;height:22px;border:1px solid var(--gold);border-radius:50%;position:relative;display:inline-block}
+  .top .mark i::after{content:'';position:absolute;inset:4px;border:1px solid var(--gold);border-radius:50%;opacity:.6}
+  .top nav{display:flex;gap:28px}
+  .top nav a{text-decoration:none;transition:color .2s}
+  .top nav a:hover{color:var(--ink)}
+
+  /* hero */
+  .hero{overflow:clip;overflow-clip-margin:24px;padding:clamp(72px, 13vh, 150px) 0 clamp(56px, 9vh, 96px);display:grid;grid-template-columns:minmax(0,1fr) minmax(260px,360px);gap:48px;align-items:end}
+  .eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin:0 0 26px}
+  h1{margin:0;font-family:var(--serif);font-weight:500;font-size:clamp(52px, 9.2vw, 152px);line-height:.92;letter-spacing:-.02em}
+  h1 em{display:block;font-family:var(--italic);font-style:italic;font-weight:400;letter-spacing:-.01em;
+    background:linear-gradient(100deg,#8a6a35 0%,#c9a86a 22%,#f3dfae 34%,#c9a86a 46%,#8a6a35 60%,#c9a86a 78%,#f3dfae 88%,#8a6a35 100%);
+    background-size:250% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;
+    animation:flow 9s linear infinite;padding-bottom:.08em}
+  @keyframes flow{to{background-position:-250% 0}}
+  .lead{margin:0;font-size:17px;line-height:1.62;color:var(--ink-2)}
+  .lead b{color:var(--ink);font-weight:600}
+  .facts{display:flex;gap:30px;margin-top:26px;padding-top:20px;border-top:1px solid var(--hair)}
+  .facts div{font-family:var(--serif);font-size:34px;line-height:1}
+  .facts small{font-size:.5em;margin-left:2px;color:var(--ink-2)}
+  .facts span{display:block;margin-top:8px;font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
+
+  /* index */
+  .index-head{display:grid;grid-template-columns:var(--cols);gap:24px;padding:0 0 14px;border-bottom:1px solid var(--hair);
+    font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-3)}
+  :root{--cols:48px minmax(170px, 1fr) minmax(0, .9fr) minmax(130px, .62fr) minmax(0, 1.15fr) 40px}
+  ol.notes{list-style:none;margin:0;padding:0}
+  .row{position:relative;display:grid;grid-template-columns:var(--cols);gap:24px;align-items:center;
+    padding:26px 0;border-bottom:1px solid var(--hair);text-decoration:none;color:inherit;isolation:isolate;
+    opacity:0;transform:translateY(14px);animation:rise .9s var(--ease) forwards;animation-delay:calc(.25s + var(--i) * .06s)}
+  @keyframes rise{to{opacity:1;transform:none}}
+  .row::before{content:'';position:absolute;inset:0 calc(-1 * var(--pad));z-index:-1;opacity:0;transition:opacity .35s var(--ease);
+    background:linear-gradient(90deg, color-mix(in srgb, var(--c) 22%, transparent), transparent 70%)}
+  .row::after{content:'';position:absolute;left:0;bottom:-1px;height:1px;width:100%;background:var(--c);
+    transform:scaleX(0);transform-origin:left;transition:transform .6s var(--ease)}
+  .row:hover::before, .row:focus-visible::before{opacity:1}
+  .row:hover::after, .row:focus-visible::after{transform:scaleX(1)}
+  .row:focus-visible{outline:none}
+  .rank{font-family:var(--mono);font-size:12px;color:var(--ink-3);transition:color .3s}
+  .row:hover .rank, .row:focus-visible .rank{color:var(--c-l)}
+  .den{font-family:var(--serif);font-weight:500;font-size:clamp(38px, 4.6vw, 70px);line-height:.95;letter-spacing:-.015em;
+    display:flex;align-items:baseline;gap:.08em;transition:transform .5s var(--ease)}
+  .den small{font-size:.42em;font-weight:600;color:var(--ink-2);transform:translateY(-.95em);letter-spacing:0}
+  .row:hover .den, .row:focus-visible .den{transform:translateX(10px)}
+  /* yen and yuan as written in each country: the unit after the figure (円 in Japan, 元 in China) */
+  .den small.suf{margin-left:.12em;transform:translateY(-.9em);font-weight:600;
+    font-family:'Yu Mincho','Hiragino Mincho ProN','Noto Serif CJK JP','Songti SC','SimSun',serif}
+  .den small.suf:lang(zh-Hans){font-family:'Songti SC','STSong','SimSun','Noto Serif CJK SC',serif}
+  .who b{display:block;font-weight:600;font-size:17px}
+  .who span{display:block;margin-top:3px;font-size:14px;color:var(--ink-2)}
+  .what{font-size:14.5px;line-height:1.5;color:var(--ink-2)}
+  .what em{font-family:var(--italic);font-style:italic;color:var(--ink);font-size:15.5px}
+  .tag{display:inline-block;margin-left:8px;padding:1px 7px;border:1px solid var(--hair);border-radius:99px;
+    font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);vertical-align:2px}
+  .go{justify-self:end;width:40px;height:40px;border:1px solid var(--hair);border-radius:50%;display:grid;place-items:center;
+    transition:background .3s, border-color .3s, transform .5s var(--ease)}
+  .go svg{width:14px;height:14px;stroke:var(--ink);fill:none;stroke-width:1.6}
+  .row:hover .go, .row:focus-visible .go{background:var(--c);border-color:var(--c);transform:rotate(-45deg)}
+  .mthumb{display:none}
+  /* daily FX turnover (BIS): figure, a bar scaled to the US dollar's share, and the share */
+  .vol b{display:block;font-family:var(--mono);font-weight:400;font-size:15px;letter-spacing:.02em;color:var(--ink)}
+  .vol b small{font-size:11px;color:var(--ink-3)}
+  .vol .bar{display:block;height:2px;margin:9px 0 7px;background:var(--hair);position:relative;overflow:hidden}
+  .vol .bar i{position:absolute;inset:0 auto 0 0;width:var(--w);background:var(--c-l);transform-origin:left;
+    transform:scaleX(0);animation:grow 1.2s var(--ease) forwards;animation-delay:calc(.6s + var(--i) * .07s)}
+  @keyframes grow{to{transform:none}}
+  .vol .pc{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+  /* while one note is hovered, the others step back */
+  .row > *{transition:opacity .35s var(--ease)}
+  ol.notes:hover .row:not(:hover) > *:not(.go){opacity:.32}
+  ol.notes:hover .row:not(:hover) .go{opacity:.4}
+
+  /* floating preview that follows the pointer */
+  .peek{position:fixed;left:0;top:0;z-index:5;pointer-events:none;width:min(440px, 34vw);aspect-ratio:2/1;
+    perspective:900px;opacity:0;transition:opacity .25s var(--ease)}
+  .peek.on{opacity:1}
+  .peek .card{position:absolute;inset:0;transform-style:preserve-3d;will-change:transform}
+  .peek .face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;overflow:hidden}
+  .peek .face.b{transform:rotateY(180deg)}
+  .peek .imgs img{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;opacity:0;transition:opacity .3s var(--ease)}
+  .peek .imgs img.on{opacity:1}
+  /* the note's own security features (fx.js, from each explorer's cut-outs), reacting to the tilt */
+  .peek .sheen, .peek .glare{position:absolute;inset:0;pointer-events:none}
+  .peek .fx{position:absolute;inset:0;pointer-events:none}
+  .peek .fx > *{position:absolute;-webkit-mask-size:100% 100%;mask-size:100% 100%;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat}
+  /* colour-shifting ink: copper face-on, turning green as the note tilts */
+  .peek .fx .ovi{mix-blend-mode:color;opacity:calc(var(--t, 0) * .95);
+    background:linear-gradient(135deg, hsl(calc(32 + var(--t, 0) * 105) 75% 42%), hsl(calc(48 + var(--t, 0) * 110) 70% 40%))}
+  /* hologram, foil, metallic image: a rainbow band sweeps across the feature itself */
+  .peek .fx .holo{mix-blend-mode:color-dodge;opacity:calc(.25 + var(--t, 0) * .75);
+    background:linear-gradient(calc(110deg + var(--ang, 0deg)), rgba(255,80,160,.0) 10%, rgba(255,80,160,.75) 24%, rgba(255,220,90,.75) 34%,
+      rgba(90,255,170,.75) 44%, rgba(80,170,255,.75) 54%, rgba(190,110,255,.75) 64%, rgba(190,110,255,0) 78%) var(--hx, 50%) 0 / 300% 100%}
+  /* watermark: in the paper, it shows as the note tilts toward the light */
+  .peek .fx .wm{background:center / 100% 100% no-repeat;mix-blend-mode:multiply;opacity:calc(var(--t, 0) * .75)}
+  /* the sheen: a bright band sweeping across the note as it moves (always on) */
+  .peek .sheen{mix-blend-mode:screen;
+    background:linear-gradient(115deg, transparent calc(var(--sx, 50%) - 18%), rgba(255,255,255,.34) calc(var(--sx, 50%) - 3%),
+      rgba(255,255,255,.5) var(--sx, 50%), rgba(255,255,255,.34) calc(var(--sx, 50%) + 3%), transparent calc(var(--sx, 50%) + 18%))}
+  .peek .glare{mix-blend-mode:soft-light;
+    background:radial-gradient(60% 90% at var(--gx, 50%) var(--gy, 30%), rgba(255,255,255,.75), transparent 60%)}
+  /* shadow on the "table": slides opposite the tilt and narrows while the note is edge-on */
+  .peek .shadow{position:absolute;inset:6% 4%;border-radius:4px;background:rgba(0,0,0,.75);filter:blur(22px);
+    transform:translate3d(var(--sx2, 0px), 26px, 0) scaleX(var(--ss, 1));opacity:.85}
+
+  footer{position:relative;z-index:2;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:32px;
+    padding:56px var(--pad) 48px;margin-top:40px;color:var(--ink-3);font-size:13px;line-height:1.65}
+  footer p{margin:0;max-width:760px}
+  footer .src{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;text-align:right}
+  footer .src a{color:var(--ink-2);text-decoration:none;border-bottom:1px solid var(--hair)}
+
+  @media (max-width: 980px){
+    .hero{grid-template-columns:1fr;gap:28px}
+    :root{--cols:40px minmax(0,1fr) 40px}
+    .index-head span:nth-child(3), .index-head span:nth-child(4), .index-head span:nth-child(5), .row .what{display:none}
+    .vol{grid-column:2;max-width:260px}
+    .row{grid-template-columns:40px minmax(0,1fr) 40px;row-gap:10px}
+    .who{grid-column:2}
+    .mthumb{display:block;grid-column:2;width:min(100%, 420px);aspect-ratio:2/1;background:center / contain no-repeat;margin-top:4px}
+    .peek{display:none}
+    .top nav{display:none}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .row{animation:none;opacity:1;transform:none}
+    h1 em{animation:none}
+  }
 </style>
 </head>
 <body>
-<main>
-  <p class="eyebrow">Banknote security features</p>
-  <h1>The most circulated product.</h1>
-  <p class="lead">Two interactive notes. Tilt them, flip them, bend and fold them, pull them apart into layers and look at them under ultraviolet light, with every security feature labelled and explained.</p>
-  <div class="grid">
-    <a class="card sgd" href="sgd-10000/index.html">
-      <div class="thumb" role="img" aria-label="Singapore $10,000 note"></div>
-      <div class="body">
-        <h2>Singapore S$10,000</h2>
-        <p>Portrait Series, 1999. Kinegram foil, colour-shift ink, see-through register, latent image and more.</p>
-        <span class="go">Explore →</span>
+<div class="bg" aria-hidden="true">
+  <svg viewBox="-100 -100 200 200" fill="none" stroke="#c9a86a" stroke-width=".25" data-par="-.08" data-rot=".02">
+    <g id="r"><ellipse rx="92" ry="34"/><ellipse rx="80" ry="40"/><ellipse rx="66" ry="46"/></g>
+    <use href="#r" transform="rotate(15)"/><use href="#r" transform="rotate(30)"/><use href="#r" transform="rotate(45)"/>
+    <use href="#r" transform="rotate(60)"/><use href="#r" transform="rotate(75)"/><use href="#r" transform="rotate(90)"/>
+    <use href="#r" transform="rotate(105)"/><use href="#r" transform="rotate(120)"/><use href="#r" transform="rotate(135)"/>
+    <use href="#r" transform="rotate(150)"/><use href="#r" transform="rotate(165)"/>
+    <circle r="96"/><circle r="99"/><circle r="22"/>
+  </svg>
+</div>
+<div class="grain" aria-hidden="true"></div>
+
+<div class="wrap">
+  <header class="top">
+    <span class="mark"><i></i>Most Circulated Product</span>
+    <nav><a href="#notes">The ten notes</a><a href="https://github.com/xuanx1/mostCirculatedproduct">Source</a></nav>
+  </header>
+
+  <section class="hero">
+    <div>
+      <p class="eyebrow" data-par=".3">Banknote security features · 10 currencies</p>
+      <h1 data-par=".22" data-fade="1">The most circulated<em data-par="-.07">product.</em></h1>
+    </div>
+    <div data-par=".1">
+      <p class="lead">The highest-denomination note of each of the <b>ten most traded currencies</b>. Tilt them toward the light, flip them, bend and fold them, pull them apart into their layers and look at them under ultraviolet light, with every security feature labelled and explained.</p>
+      <div class="facts">
+        <div>10<span>Notes</span></div>
+        <div>136<span>Features</span></div>
+        <div>$9.5<small>tn</small><span>Traded a day</span></div>
       </div>
-    </a>
-    <a class="card usd" href="usd-100/index.html">
-      <div class="thumb" role="img" aria-label="US $100 note"></div>
-      <div class="body">
-        <h2>US $100</h2>
-        <p>Federal Reserve note, Series 2021. 3-D Security Ribbon, Bell in the Inkwell, colour-shifting 100 and more.</p>
-        <span class="go">Explore →</span>
-      </div>
-    </a>
-  </div>
-  <footer>For education about anti-counterfeiting features. Note images are reproductions for illustration only and are not legal tender.
-    Source: <a href="https://github.com/xuanx1/mostCirculatedproduct">github.com/xuanx1/mostCirculatedproduct</a></footer>
-</main>
+    </div>
+  </section>
+
+  <div class="index-head" id="notes" aria-hidden="true"><span>No.</span><span>Note</span><span>Issuer</span><span>Traded daily</span><span>On the note</span><span></span></div>
+  <ol class="notes">
+    <li><a class="row" href="usd-100/index.html" style="--i:0;--c:#1f7a4a;--c-l:#6fd39a" data-img="thumbs/usd-100.webp">
+      <span class="rank">01</span><span class="den"><small>$</small>100</span>
+      <span class="who"><b>US dollar</b><span>Federal Reserve · Series 2021</span></span>
+      <span class="vol" style="--w:100.0%"><b>$8,472<small> bn</small></b><span class="bar"><i></i></span><span class="pc">89% of trades</span></span>
+      <span class="what"><em>Benjamin Franklin.</em> 3-D Security Ribbon, Bell in the Inkwell, colour-shifting 100.</span>
+      <span class="mthumb" style="background-image:url(thumbs/usd-100.webp)"></span>
+      <span class="go"><svg viewBox="0 0 14 14"><path d="M2 7h10M8 3l4 4-4 4"/></svg></span></a></li>
+    <li><a class="row" href="eur-500/index.html" style="--i:1;--c:#7a4a9a;--c-l:#c9a3e6" data-img="thumbs/eur-500.webp">
+      <span class="rank">02</span><span class="den"><small>€</small>500</span>
+      <span class="who"><b>Euro</b><span>European Central Bank · First series</span></span>
+      <span class="vol" style="--w:32.6%"><b>$2,714<small> bn</small></b><span class="bar"><i></i></span><span class="pc">29% of trades</span></span>
+      <span class="what"><em>Modern 20th-century architecture.</em> Hologram patch, watermark, colour-changing number.<span class="tag">No longer issued</span></span>
+      <span class="mthumb" style="background-image:url(thumbs/eur-500.webp)"></span>
+      <span class="go"><svg viewBox="0 0 14 14"><path d="M2 7h10M8 3l4 4-4 4"/></svg></span></a></li>
+    <li><a class="row" href="jpy-10000/index.html" style="--i:2;--c:#a0392f;--c-l:#e89a86" data-img="thumbs/jpy-10000.webp">
+      <span class="rank">03</span><span class="den">10,000<small class="suf" lang="ja">円</small></span>
+      <span class="who"><b>Japanese yen</b><span>Bank of Japan · 2024 series</span></span>
+      <span class="vol" style="--w:19.1%"><b>$1,608<small> bn</small></b><span class="bar"><i></i></span><span class="pc">17% of trades</span></span>
+      <span class="what"><em>Shibusawa Eiichi.</em> 3D hologram portrait, high-definition watermark, latent images.</span>
+      <span class="mthumb" style="background-image:url(thumbs/jpy-10000.webp)"></span>
+      <span class="go"><svg viewBox="0 0 14 14"><path d="M2 7h10M8 3l4 4-4 4"/></svg></span></a></li>
+    <li><a class="row" href="gbp-50/index.html" style="--i:3;--c:#b0213c;--c-l:#f08da0" data-img="thumbs/gbp-50.webp">
+      <span class="rank">04</span><span class="den"><small>£</small>50</span>
+      <span class="who"><b>Pound sterling</b><span>Bank of England · Polymer</span></span>
+      <span class="vol" style="--w:11.2%"><b>$967<small> bn</small></b><span class="bar"><i></i></span><span class="pc">10% of trades</span></span>
+      <span class="what"><em>Alan Turing.</em> See-through windows, hologram, gold and green foil.</span>
+      <span class="mthumb" style="background-image:url(thumbs/gbp-50.webp)"></span>
+      <span class="go"><svg viewBox="0 0 14 14"><path d="M2 7h10M8 3l4 4-4 4"/></svg></span></a></li>
+    <li><a class="row" href="cny-100/index.html" style="--i:4;--c:#b3121f;--c-l:#f28a8f" data-img="thumbs/cny-100.webp">
+      <span class="rank">05</span><span class="den">100<small class="suf" lang="zh-Hans">元</small></span>
+      <span class="who"><b>Chinese renminbi</b><span>People's Bank of China · 2015 edition</span></span>
+      <span class="vol" style="--w:10.1%"><b>$817<small> bn</small></b><span class="bar"><i></i></span><span class="pc">9% of trades</span></span>
+      <span class="what"><em>Mao Zedong.</em> Colour-shifting 100, windowed thread, portrait and white watermarks.</span>
+      <span class="mthumb" style="background-image:url(thumbs/cny-100.webp)"></span>
+      <span class="go"><svg viewBox="0 0 14 14"><path d="M2 7h10M8 3l4 4-4 4"/></svg></span></a></li>
+    <li><a class="row" href="chf-1000/index.html" style="--i:5;--c:#6a4aa8;--c-l:#b9a2ee" data-img="thumbs/chf-1000.webp">
+      <span class="rank">06</span><span class="den"><small>CHF</small>1000</span>
+      <span class="who"><b>Swiss franc</b><span>Swiss National Bank · Ninth series</span></span>
+      <span class="vol" style="--w:6.7%"><b>$601<small> bn</small></b><span class="bar"><i></i></span><span class="pc">6% of trades</span></span>
+      <span class="what"><em>Communicative flair.</em> Globe, security strip, Swiss cross window, three-layer Durasafe.</span>
+      <span class="mthumb" style="background-image:url(thumbs/chf-1000.webp)"></span>
+      <span class="go"><svg viewBox="0 0 14 14"><path d="M2 7h10M8 3l4 4-4 4"/></svg></span></a></li>
+    <li><a class="row" href="aud-100/index.html" style="--i:6;--c:#2f7a3a;--c-l:#93d29b" data-img="thumbs/aud-100.webp">
+      <span class="rank">07</span><span class="den"><small>A$</small>100</span>
+      <span class="who"><b>Australian dollar</b><span>Reserve Bank of Australia · 2020</span></span>
+      <span class="vol" style="--w:6.7%"><b>$582<small> bn</small></b><span class="bar"><i></i></span><span class="pc">6% of trades</span></span>
+      <span class="what"><em>Nellie Melba and John Monash.</em> Top-to-bottom window, flying owl, reversing 100.</span>
+      <span class="mthumb" style="background-image:url(thumbs/aud-100.webp)"></span>
+      <span class="go"><svg viewBox="0 0 14 14"><path d="M2 7h10M8 3l4 4-4 4"/></svg></span></a></li>
+    <li><a class="row" href="cad-100/index.html" style="--i:7;--c:#8a4a24;--c-l:#e0a37c" data-img="thumbs/cad-100.webp">
+      <span class="rank">08</span><span class="den"><small>C$</small>100</span>
+      <span class="who"><b>Canadian dollar</b><span>Bank of Canada · Frontier series</span></span>
+      <span class="vol" style="--w:6.7%"><b>$547<small> bn</small></b><span class="bar"><i></i></span><span class="pc">6% of trades</span></span>
+      <span class="what"><em>Sir Robert Borden.</em> Large window, metallic portrait and building, hidden numbers.</span>
+      <span class="mthumb" style="background-image:url(thumbs/cad-100.webp)"></span>
+      <span class="go"><svg viewBox="0 0 14 14"><path d="M2 7h10M8 3l4 4-4 4"/></svg></span></a></li>
+    <li><a class="row" href="hkd-1000/index.html" style="--i:8;--c:#c8402a;--c-l:#f3a088" data-img="thumbs/hkd-1000.webp">
+      <span class="rank">09</span><span class="den"><small>HK$</small>1,000</span>
+      <span class="who"><b>Hong Kong dollar</b><span>HSBC · Standard Chartered · Bank of China · 2018 series</span></span>
+      <span class="vol" style="--w:4.5%"><b>$367<small> bn</small></b><span class="bar"><i></i></span><span class="pc">4% of trades</span></span>
+      <span class="what"><em>Stitt, the HSBC lion.</em> Dynamic shimmering pattern, windowed thread, see-through 1000.</span>
+      <span class="mthumb" style="background-image:url(thumbs/hkd-1000.webp)"></span>
+      <span class="go"><svg viewBox="0 0 14 14"><path d="M2 7h10M8 3l4 4-4 4"/></svg></span></a></li>
+    <li><a class="row" href="sgd-10000/index.html" style="--i:9;--c:#b08a4e;--c-l:#e3c58e" data-img="thumbs/sgd-10000.webp">
+      <span class="rank">10</span><span class="den"><small>S$</small>10,000</span>
+      <span class="who"><b>Singapore dollar</b><span>Monetary Authority of Singapore · Portrait Series</span></span>
+      <span class="vol" style="--w:2.2%"><b>$232<small> bn</small></b><span class="bar"><i></i></span><span class="pc">2% of trades</span></span>
+      <span class="what"><em>Yusof bin Ishak.</em> Kinegram, latent image, see-through register.</span>
+      <span class="mthumb" style="background-image:url(thumbs/sgd-10000.webp)"></span>
+      <span class="go"><svg viewBox="0 0 14 14"><path d="M2 7h10M8 3l4 4-4 4"/></svg></span></a></li>
+  </ol>
+</div>
+
+<div class="peek" aria-hidden="true"><div class="shadow"></div><div class="card">
+  <div class="face f"><div class="imgs"></div><div class="fx"></div><div class="sheen"></div><div class="glare"></div></div>
+  <div class="face b"><div class="imgs"></div><div class="fx"></div><div class="sheen"></div><div class="glare"></div></div>
+</div></div>
+
+<footer>
+  <p>Ordered by foreign-exchange turnover: daily averages in April 2025, “net-net” basis, from the BIS Triennial Central Bank Survey 2025 (statistical annex, Table 25.2). Each trade involves two currencies, so the shares add up to 200%. For education about anti-counterfeiting features: the note images are reproductions for illustration only and are not legal tender. Each note's README states its image sources and the issuer's rules for reproducing it.</p>
+  <div class="src"><a href="https://github.com/xuanx1/mostCirculatedproduct">github.com/xuanx1/mostCirculatedproduct</a></div>
+</footer>
+
+<script src="fx.js"></script>
+<script>
+// hero parallax: each layer moves at its own rate as the page scrolls; the title fades as it leaves
+(() => {
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const els = [...document.querySelectorAll('[data-par]')].map(el => ({ el, k: +el.dataset.par, r: +(el.dataset.rot || 0), fade: !!el.dataset.fade }));
+  let pending = false;
+  function apply() {
+    pending = false;
+    const y = scrollY, vh = innerHeight;
+    if (y > vh * 1.6) return;                     // the hero is well off screen: nothing to move
+    for (const { el, k, r, fade } of els) {
+      el.style.transform = `translate3d(0, ${(y * k).toFixed(1)}px, 0)` + (r ? ` rotate(${(y * r).toFixed(2)}deg)` : '');
+      if (fade) el.style.opacity = Math.max(0, 1 - y / (vh * 0.75)).toFixed(3);
+    }
+  }
+  addEventListener('scroll', () => { if (!pending) { pending = true; requestAnimationFrame(apply); } }, { passive: true });
+  apply();
+})();
+(() => {
+  const peek = document.querySelector('.peek'), card = peek.querySelector('.card');
+  const faces = { f: peek.querySelector('.face.f'), b: peek.querySelector('.face.b') };
+  const rows = [...document.querySelectorAll('.row')];
+  // front and back image per note; the effect layers take the note's own shape as their mask
+  const imgs = new Map(rows.map(r => {
+    const back = r.dataset.img.replace('.webp', '-back.webp');
+    const mk = (src, face) => { const im = new Image(); im.src = src; im.alt = ''; im.decoding = 'async';
+      faces[face].querySelector('.imgs').appendChild(im); return im; };
+    return [r, { f: mk(r.dataset.img, 'f'), b: mk(back, 'b'), fs: r.dataset.img, bs: back }];
+  }));
+  if (matchMedia('(max-width: 980px)').matches) return;
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let tx = 0, ty = 0, x = 0, y = 0, vx = 0, vy = 0, active = null, raf = 0;
+  // flip as in the explorers: one hard sideways flick turns the note exactly one half-turn, driven by the
+  // explorers' own flip spring (pull .075, damping .8), with the paper flexing against the turn
+  let ang = 0, angV = 0, flipTo = 0, flickV = 0, armed = true;
+  let rowBox = null, lastPX = null, lastT = 0;
+  const W = () => peek.offsetWidth, H = () => peek.offsetHeight;
+  const FLICK = 30;                            // sustained sideways speed (px per frame) that counts as a flick
+  function setOn(r, on) { const o = imgs.get(r); o.f.classList.toggle('on', on); o.b.classList.toggle('on', on); }
+  function show(r) {
+    if (active === r) return;
+    if (active) setOn(active, false);
+    active = r; setOn(r, true);
+    const o = imgs.get(r);
+    // this note's own tilt features: colour-shifting ink, holograms and foils, watermark
+    const fx = (window.NOTE_FX || {})[r.getAttribute('href').split('/')[0]] || [];
+    for (const side of ['f', 'b']) {
+      const host = faces[side].querySelector('.fx'); host.textContent = '';
+      for (const e of fx.filter(e => e.side === side)) {
+        const d = document.createElement('i'); d.className = e.kind;
+        Object.assign(d.style, { left: e.box[0] * 100 + '%', top: e.box[1] * 100 + '%', width: e.box[2] * 100 + '%', height: e.box[3] * 100 + '%' });
+        if (e.kind === 'wm') d.style.backgroundImage = `url(${e.src})`;
+        else { d.style.webkitMaskImage = `url(${e.src})`; d.style.maskImage = `url(${e.src})`; }
+        host.appendChild(d);
+      }
+    }
+    // the preview takes this note's own proportions, so shine, glare and shadow fit its edges exactly
+    const fit = () => { if (o.f.naturalWidth) peek.style.aspectRatio = `${o.f.naturalWidth} / ${o.f.naturalHeight}`; };
+    o.f.complete ? fit() : o.f.addEventListener('load', fit, { once: true });
+    ang = 0; angV = 0; flipTo = 0; flickV = 0; armed = true; vx = 0;   // every new hover starts on the front
+    peek.classList.add('on');
+    if (!peek.dataset.placed) { x = tx; y = ty; peek.dataset.placed = 1; }
+    if (!raf) raf = requestAnimationFrame(tick);
+  }
+  function hide() { if (active) setOn(active, false); active = null; peek.classList.remove('on'); delete peek.dataset.placed; lastPX = null; }
+  function target(px, py) {
+    tx = Math.max(24, Math.min(px - W() * 0.35, innerWidth - W() - 24));
+    const b = rowBox || { top: py - 40, bottom: py + 40 };
+    ty = b.top - H() - 14 >= 16 ? b.top - H() - 14 : Math.min(b.bottom + 14, innerHeight - H() - 16);
+  }
+  function tick() {
+    const k = reduce ? 1 : 0.14;
+    const nx = x + (tx - x) * k, ny = y + (ty - y) * k;
+    vx = vx * 0.8 + (nx - x) * 0.2; vy = vy * 0.8 + (ny - y) * 0.2; x = nx; y = ny;
+    if (reduce) { ang = flipTo; angV = 0; }
+    else {
+      angV = (angV + (flipTo - ang) * 0.075) * 0.8; ang += angV;
+      if (Math.abs(flipTo - ang) < 0.05 && Math.abs(angV) < 0.05) { ang = flipTo; angV = 0; }
+    }
+    const flex = Math.max(-10, Math.min(10, -angV * 0.5));      // the paper bows against the turn
+    const tilt = Math.max(-14, Math.min(14, vx * 1.1)), pitch = Math.max(-12, Math.min(12, -vy * 0.8));
+    const edge = Math.abs(Math.sin(ang * Math.PI / 180));
+    const flipShown = ang / 180;
+    peek.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+    card.style.transform = `rotateY(${(ang + tilt).toFixed(2)}deg) rotateX(${(pitch + flex * 0.4).toFixed(2)}deg) rotateZ(${(tilt * -0.1).toFixed(2)}deg) skewY(${(flex * 0.35).toFixed(2)}deg)`;
+    const t = Math.min(1, Math.abs(tilt) / 18 + edge * 0.8);
+    for (const f of [faces.f, faces.b]) {
+      f.style.setProperty('--hx', (50 + tilt * 3.2 + edge * 60).toFixed(1) + '%');
+      f.style.setProperty('--ang', (tilt * 1.5).toFixed(1) + 'deg');
+      f.style.setProperty('--t', t.toFixed(3));
+      f.style.setProperty('--gx', (50 - tilt * 2.6).toFixed(1) + '%');
+      f.style.setProperty('--sx', (50 - tilt * 2.4 - edge * 70).toFixed(1) + '%');
+      f.style.setProperty('--gy', (30 - pitch * 2).toFixed(1) + '%');
+    }
+    peek.style.setProperty('--sx2', (-tilt * 1.4).toFixed(1) + 'px');
+    peek.style.setProperty('--ss', (1 - edge * 0.7).toFixed(3));
+    raf = (active || Math.abs(vx) > 0.05 || Math.abs(angV) > 0.02) ? requestAnimationFrame(tick) : 0;
+  }
+  rows.forEach(r => {
+    r.addEventListener('pointerenter', e => { rowBox = r.getBoundingClientRect(); target(e.clientX, e.clientY); lastPX = e.clientX; lastT = performance.now(); show(r); });
+    r.addEventListener('pointermove', e => {
+      rowBox = r.getBoundingClientRect(); target(e.clientX, e.clientY);
+      // a gentle move only leans the note; a sustained fast swipe flips it once, in the swipe's direction.
+      // One swipe is one flip: the next one needs the pointer to slow down first and this flip to have landed.
+      const now = performance.now(), dt = Math.max(12, now - lastT);
+      const v = lastPX == null ? 0 : (e.clientX - lastPX) / dt * 16;     // px per frame
+      lastPX = e.clientX; lastT = now;
+      flickV = flickV * 0.5 + v * 0.5;                                 // smoothed: one jumpy event is not a flick
+      if (Math.abs(flickV) < FLICK * 0.3) armed = true;
+      if (armed && Math.abs(flickV) > FLICK && Math.abs(flipTo - ang) < 20) {
+        flipTo += Math.sign(flickV) * 180; flickV = 0; armed = false;
+        if (!raf) raf = requestAnimationFrame(tick);
+      }
+    });
+    r.addEventListener('focus', () => { const b = rowBox = r.getBoundingClientRect(); target(b.left + b.width * 0.6, b.top + b.height / 2); show(r); });
+    r.addEventListener('blur', hide);
+  });
+  document.querySelector('ol.notes').addEventListener('pointerleave', hide);
+  addEventListener('scroll', () => { if (active) { rowBox = active.getBoundingClientRect(); target(x + W() * 0.35, 0); } }, { passive: true });
+})();
+</script>
 </body>
 </html>

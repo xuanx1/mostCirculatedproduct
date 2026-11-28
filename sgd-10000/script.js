@@ -960,6 +960,7 @@ noteWrap.addEventListener('pointerdown', (e) => {
     hideTag();
   } else if (!state.exploded && (e.shiftKey || isEdge(e))) {
     ptr.mode = 'bend';
+    if (phys.foldT !== 0) setFold(false);              // bending undoes a fold
     ptr.side = edgeSide(e) || 'right';
     ptr.bend0 = state.bend;
     noteWrap.classList.add('bending');
@@ -1068,12 +1069,14 @@ function setFold(on) {
     phys.foldT = 0;
   }
   $('foldBtn').setAttribute('aria-pressed', on);
+  if (on && state.bend !== 0) { state.bend = 0; bendSlider.value = 0; }   // fold and bend exclude each other
   if (on && state.exploded) setExploded(false);
   kick();
 }
 $('foldBtn').addEventListener('click', () => setFold(phys.foldT === 0));
 bendSlider.addEventListener('input', () => {
   if (state.exploded) setExploded(false);
+  if (phys.foldT !== 0) setFold(false);            // bending undoes a fold
   state.bend = +bendSlider.value;
   kick();
 });

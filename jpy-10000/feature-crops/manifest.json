@@ -1,0 +1,518 @@
+{
+  "note_space": [
+    720,
+    320
+  ],
+  "sources": {
+    "front": "jpy-10000-front.png",
+    "back": "jpy-10000-back.png"
+  },
+  "crops": [
+    {
+      "id": "hologram",
+      "side": "front",
+      "label": "3D hologram (stripe)",
+      "shape": "poly",
+      "note_box": [
+        52,
+        3,
+        81.5,
+        314
+      ],
+      "source_px": [
+        260,
+        16,
+        668,
+        1694
+      ],
+      "size_px": {
+        "cutout": [
+          260,
+          1518
+        ],
+        "ink": [
+          276,
+          1518
+        ]
+      },
+      "paper_rgb": [
+        255,
+        255,
+        255
+      ],
+      "files": {
+        "cutout": "front/hologram.png",
+        "ink": "front/hologram-ink.png"
+      }
+    },
+    {
+      "id": "portrait",
+      "side": "front",
+      "label": "Portrait of Shibusawa Eiichi",
+      "shape": "rect",
+      "note_box": [
+        394,
+        18,
+        280,
+        280
+      ],
+      "source_px": [
+        1970,
+        96,
+        3370,
+        1592
+      ],
+      "size_px": {
+        "cutout": [
+          1258,
+          1342
+        ],
+        "ink": [
+          1280,
+          1364
+        ]
+      },
+      "paper_rgb": [
+        252,
+        244,
+        227
+      ],
+      "files": {
+        "cutout": "front/portrait.png",
+        "ink": "front/portrait-ink.png"
+      }
+    },
+    {
+      "id": "numeral",
+      "side": "front",
+      "label": "Face value 10000 (deep intaglio)",
+      "shape": "rect",
+      "note_box": [
+        110,
+        92,
+        220,
+        106
+      ],
+      "source_px": [
+        550,
+        492,
+        1650,
+        1058
+      ],
+      "size_px": {
+        "cutout": [
+          958,
+          412
+        ],
+        "ink": [
+          949,
+          418
+        ]
+      },
+      "paper_rgb": [
+        255,
+        251,
+        235
+      ],
+      "files": {
+        "cutout": "front/numeral.png",
+        "ink": "front/numeral-ink.png"
+      }
+    },
+    {
+      "id": "numeral-br",
+      "side": "front",
+      "label": "10000, lower right",
+      "shape": "rect",
+      "note_box": [
+        576,
+        236,
+        144,
+        84
+      ],
+      "source_px": [
+        2880,
+        1261,
+        3600,
+        1710
+      ],
+      "size_px": {
+        "cutout": [
+          588,
+          337
+        ],
+        "ink": [
+          591,
+          338
+        ]
+      },
+      "paper_rgb": [
+        251,
+        244,
+        224
+      ],
+      "files": {
+        "cutout": "front/numeral-br.png",
+        "ink": "front/numeral-br-ink.png"
+      }
+    },
+    {
+      "id": "tactile-left",
+      "side": "front",
+      "label": "Identification mark (left)",
+      "shape": "rect",
+      "note_box": [
+        0,
+        96,
+        74,
+        138
+      ],
+      "source_px": [
+        0,
+        513,
+        370,
+        1250
+      ],
+      "size_px": {
+        "cutout": [
+          248,
+          583
+        ],
+        "ink": [
+          246,
+          568
+        ]
+      },
+      "paper_rgb": [
+        255,
+        255,
+        253
+      ],
+      "files": {
+        "cutout": "front/tactile-left.png",
+        "ink": "front/tactile-left-ink.png"
+      }
+    },
+    {
+      "id": "tactile-right",
+      "side": "front",
+      "label": "Identification mark (right)",
+      "shape": "rect",
+      "note_box": [
+        642,
+        96,
+        78,
+        138
+      ],
+      "source_px": [
+        3210,
+        513,
+        3600,
+        1250
+      ],
+      "size_px": {
+        "cutout": [
+          268,
+          583
+        ],
+        "ink": [
+          269,
+          581
+        ]
+      },
+      "paper_rgb": [
+        253,
+        246,
+        239
+      ],
+      "files": {
+        "cutout": "front/tactile-right.png",
+        "ink": "front/tactile-right-ink.png"
+      }
+    },
+    {
+      "id": "seal",
+      "side": "front",
+      "label": "Seal of the Governor of the Bank of Japan",
+      "shape": "ellipse",
+      "note_box": [
+        200,
+        197.5,
+        102,
+        98.0
+      ],
+      "source_px": [
+        1000,
+        1055,
+        1510,
+        1579
+      ],
+      "size_px": {
+        "cutout": [
+          368,
+          369
+        ],
+        "ink": [
+          361,
+          362
+        ]
+      },
+      "paper_rgb": [
+        255,
+        253,
+        243
+      ],
+      "files": {
+        "cutout": "front/seal.png",
+        "ink": "front/seal-ink.png"
+      }
+    },
+    {
+      "id": "cartouche",
+      "side": "front",
+      "label": "Latent-image cartouche",
+      "shape": "rect",
+      "note_box": [
+        268,
+        234,
+        182,
+        86
+      ],
+      "source_px": [
+        1340,
+        1250,
+        2250,
+        1710
+      ],
+      "size_px": {
+        "cutout": [
+          768,
+          337
+        ],
+        "ink": [
+          790,
+          344
+        ]
+      },
+      "paper_rgb": [
+        254,
+        248,
+        236
+      ],
+      "files": {
+        "cutout": "front/cartouche.png",
+        "ink": "front/cartouche-ink.png"
+      }
+    },
+    {
+      "id": "watermark",
+      "side": "front",
+      "label": "Watermark portrait (rebuilt from the engraved portrait)",
+      "shape": "ellipse",
+      "note_box": [
+        317,
+        68,
+        132,
+        160
+      ],
+      "source_px": [
+        1495,
+        267,
+        2335,
+        1315
+      ],
+      "size_px": [
+        660,
+        855
+      ],
+      "paper_rgb": [
+        255,
+        251,
+        232
+      ],
+      "files": {
+        "cutout": "front/watermark.png",
+        "ink": "front/watermark-ink.png"
+      }
+    },
+    {
+      "id": "station",
+      "side": "back",
+      "label": "Tokyo Station Marunouchi building",
+      "shape": "rect",
+      "note_box": [
+        0,
+        4,
+        318,
+        300
+      ],
+      "source_px": [
+        0,
+        21,
+        1590,
+        1624
+      ],
+      "size_px": {
+        "cutout": [
+          1498,
+          1449
+        ],
+        "ink": [
+          1520,
+          1453
+        ]
+      },
+      "paper_rgb": [
+        251,
+        245,
+        227
+      ],
+      "files": {
+        "cutout": "back/station.png",
+        "ink": "back/station-ink.png"
+      }
+    },
+    {
+      "id": "numeral-big",
+      "side": "back",
+      "label": "10000 (large, back)",
+      "shape": "rect",
+      "note_box": [
+        442,
+        2,
+        278,
+        132
+      ],
+      "source_px": [
+        2210,
+        11,
+        3600,
+        716
+      ],
+      "size_px": {
+        "cutout": [
+          1258,
+          551
+        ],
+        "ink": [
+          1255,
+          527
+        ]
+      },
+      "paper_rgb": [
+        255,
+        251,
+        237
+      ],
+      "files": {
+        "cutout": "back/numeral-big.png",
+        "ink": "back/numeral-big-ink.png"
+      }
+    },
+    {
+      "id": "numeral-small",
+      "side": "back",
+      "label": "10000 YEN (lower left)",
+      "shape": "rect",
+      "note_box": [
+        0,
+        250,
+        186,
+        70
+      ],
+      "source_px": [
+        0,
+        1336,
+        930,
+        1710
+      ],
+      "size_px": {
+        "cutout": [
+          788,
+          252
+        ],
+        "ink": [
+          776,
+          245
+        ]
+      },
+      "paper_rgb": [
+        252,
+        247,
+        230
+      ],
+      "files": {
+        "cutout": "back/numeral-small.png",
+        "ink": "back/numeral-small-ink.png"
+      }
+    },
+    {
+      "id": "wordmark",
+      "side": "back",
+      "label": "NIPPON (wordmark)",
+      "shape": "rect",
+      "note_box": [
+        104,
+        10,
+        144,
+        66
+      ],
+      "source_px": [
+        520,
+        53,
+        1240,
+        406
+      ],
+      "size_px": {
+        "cutout": [
+          578,
+          198
+        ],
+        "ink": [
+          586,
+          192
+        ]
+      },
+      "paper_rgb": [
+        247,
+        241,
+        222
+      ],
+      "files": {
+        "cutout": "back/wordmark.png",
+        "ink": "back/wordmark-ink.png"
+      }
+    },
+    {
+      "id": "watermark",
+      "side": "back",
+      "label": "Watermark portrait (reverse: the same watermark, mirrored)",
+      "shape": "ellipse",
+      "note_box": [
+        271,
+        68,
+        132,
+        160
+      ],
+      "source_px": [
+        1265,
+        267,
+        2105,
+        1315
+      ],
+      "size_px": [
+        660,
+        855
+      ],
+      "paper_rgb": [
+        255,
+        252,
+        235
+      ],
+      "files": {
+        "cutout": "back/watermark.png",
+        "ink": "back/watermark-ink.png"
+      }
+    }
+  ]
+}

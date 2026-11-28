@@ -1,0 +1,116 @@
+{
+ "front-numeral": [
+  10,
+  10,
+  204,
+  78
+ ],
+ "front-shimmer": [
+  544,
+  16,
+  116,
+  100
+ ],
+ "front-thread": [
+  449,
+  54,
+  34,
+  254
+ ],
+ "front-seethrough": [
+  526,
+  256,
+  146,
+  58
+ ],
+ "front-seethrough-uv-a": [
+  526,
+  256,
+  146,
+  58
+ ],
+ "front-seethrough-uv-b": [
+  526,
+  256,
+  146,
+  58
+ ],
+ "back-seethrough": [
+  46,
+  256,
+  140,
+  58
+ ],
+ "back-seethrough-uv-a": [
+  46,
+  256,
+  140,
+  58
+ ],
+ "back-seethrough-uv-b": [
+  46,
+  256,
+  140,
+  58
+ ],
+ "front-serial-h": [
+  40,
+  260,
+  108,
+  24
+ ],
+ "front-serial-v": [
+  664,
+  122,
+  24,
+  126
+ ],
+ "front-signature": [
+  36,
+  176,
+  166,
+  34
+ ],
+ "front-braille": [
+  40,
+  282,
+  112,
+  26
+ ],
+ "front-tactile-l": [
+  0,
+  130,
+  24,
+  180
+ ],
+ "front-tactile-r": [
+  696,
+  136,
+  24,
+  174
+ ],
+ "watermark-ghost": [
+  529.84,
+  102.15,
+  137.86,
+  149.69
+ ],
+ "front-latent": [
+  334,
+  218,
+  62,
+  26
+ ],
+ "front-building": [
+  186,
+  50,
+  236,
+  270
+ ],
+ "back-skyline": [
+  160,
+  0,
+  375,
+  320
+ ]
+}

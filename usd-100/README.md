@@ -16,7 +16,7 @@ Same as the S$10,000 page: move to tilt, left-drag to rotate, right-drag to pan,
 
 ## Illustrative, not exact
 
-- **3-D ribbon:** the bells and 100s on it are drawn over the ribbon, not the real micro-images.
+- **3-D ribbon:** the scans don't resolve its micro-images, so the bell tile is the note's own Liberty Bell (cut from the Bell in the Inkwell) and the 100 tile is the note's own 100 (`tools/ribbon_tiles.py`). The real ribbon's images are smaller.
 - **Security thread:** a reflected-light image doesn't show it, so it is drawn from the official description, and its position is approximate.
 - **Artwork:** upscaled with Real-ESRGAN and brightened (`tools/upscale.py`). The upscaler sharpens line-work but cannot recover microprint the source photo never captured.
 
@@ -34,5 +34,8 @@ Same as the S$10,000 page: move to tilt, left-drag to rotate, right-drag to pan,
 - **Back image:** [Wikimedia Commons, Reverse of the $100 Federal Reserve Note](https://commons.wikimedia.org/wiki/File:Reverse_of_the_$100_Federal_Reserve_Note.jpg), marked public domain.
 - **Front image:** a Series 2021 photo supplied by the project owner (serial QC 02836101 A); confirm its rights before publishing.
 - **Feature facts:** [uscurrency.gov](https://www.uscurrency.gov/denominations/100); circulation date from the Federal Reserve's 2013 announcement.
+- **Federal Reserve System seal:** the public-domain vector on [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Seal_of_the_United_States_Federal_Reserve_System.svg) (linked from the Federal Reserve article on Wikipedia), registered onto the scan and given the note's black lettering band (`tools/vector_seal.py`).
+- **Liberty Bell for the ribbon:** from the uscurrency.gov *Decoding Dollars: $100* PDF (US federal work), in `source/found/`.
+- **Page background:** the Declaration of Independence, Library of Congress scan of the 1823 William Stone facsimile, [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:US_Declaration_of_Independence_us0036_03.jpg), public domain (`tools/declaration_bg.py`).
 - **Title font:** Abril Fatface (SIL Open Font License), bundled in `fonts/`.
 - **Reproduction rules:** [uscurrency.gov, Currency Image Use](https://www.uscurrency.gov/media/currency-image-use).

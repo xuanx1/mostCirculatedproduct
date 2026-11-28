@@ -71,8 +71,8 @@ const featById = (id) => FEATURES.find(f => f.id === id);
 const ANNO = {
   front: [['serial', [[110, 72], [596, 218]]], ['frb', 119, 153], ['signature', 84, 222], ['intaglio', 200, 262],
           ['thread', 159, 30], ['fineline', 262, 70], ['ribbon', 386, 120],
-          ['eurion', 60, 110], ['declaration', 640, 185], ['microprint', 470, 190], ['treasury', 551, 142], ['watermark', 633, 160], ['bell', 450, 240], ['ovi', 610, 266]],
-  back:  [['watermark', 95, 160], ['eurion', [[170, 75], [520, 76]]], ['fineline', 330, 150], ['gold100', 628, 150]],
+          ['eurion', 60, 110], ['declaration', 640, 185], ['microprint', 470, 190], ['treasury', 551, 142], ['watermark', 653, 121], ['bell', 450, 240], ['ovi', 610, 266]],
+  back:  [['watermark', 67, 121], ['eurion', [[170, 75], [520, 76]]], ['fineline', 330, 150], ['gold100', 628, 150]],
 };
 const annoEls = [];
 // Labels are drawn in a flat 2D layer (crisp text, never rasterised inside the 3D note).
@@ -332,8 +332,8 @@ let opticTargets = [...frontFace.querySelectorAll('.optic'), ...backFace.querySe
    note uses the full faces above.
    ===================================================================== */
 const N = 64, SW = NW / N, OVER = 2;      // overlap hides seams between strips
-const GHOST_BOX = [578, 45, 110, 200];
-const GHOST_BOX_BACK = [720 - 578 - 110, 45, 110, 200];   // a watermark is in the paper: mirrored on the reverse
+const GHOST_BOX = [613, 66, 80, 110];                          // centred in the blank cream oval right of the portrait
+const GHOST_BOX_BACK = [720 - 613 - 80, 66, 80, 110];   // a watermark is in the paper: mirrored on the reverse
 const WM_PATCH_BACK = [0, 0, 0, 0];                         // (no printed watermark to cover on this artwork)
 const stripsEl = document.createElement('div');
 stripsEl.className = 'strips';
@@ -481,7 +481,7 @@ function opticValues(rxDeg, ryDeg) {
       // ribbon: tilt back and forth (rx) -> images move side to side; tilt side to side (ry) -> up and down
       ['--rb-x', (Math.sin(rxDeg * D2R) * 260).toFixed(1) + '%'],
       ['--rb-y', (Math.sin(ryDeg * D2R) * 900).toFixed(1) + '%'],
-      ['--rb-swap', smooth01(3, 10, theta).toFixed(3)],         // bells -> 100s
+      ['--rb-swap', (0.5 - 0.5 * Math.cos(theta * D2R * 30)).toFixed(3)],   // bells <-> 100s, alternating every ~6 deg of tilt
       ['--ovi-a', smooth01(0.8, 5, theta).toFixed(3)],             // face-on: the artwork as printed, no tint
       ['--holo-tx', (nx * 34 - ny * 18).toFixed(2) + '%'],         // rainbow bands slide (transform)
       ['--holo-rot', (ryDeg * 1.6 + rxDeg * 1.1).toFixed(1) + 'deg'],
@@ -725,7 +725,7 @@ function renderDetail() {
     // the overview follows the view: obverse, reverse or ultraviolet
     const OVERVIEW = {
       back: `
-      <p class="d-eyebrow">Overview · Back</p>
+      <p class="d-eyebrow">Overview · Reverse</p>
       <h2>Independence Hall, <em>in fine line.</em></h2>
       <p class="d-desc">The back carries an engraved vignette of Independence Hall in Philadelphia, where the
         Declaration of Independence was adopted, and a large gold 100 that helps people with visual
@@ -921,6 +921,7 @@ noteWrap.addEventListener('pointerdown', (e) => {
     hideTag();
   } else if (!state.exploded && (e.shiftKey || isEdge(e))) {
     ptr.mode = 'bend';
+    if (phys.foldT !== 0) setFold(false);              // bending undoes a fold
     ptr.side = edgeSide(e) || 'right';
     ptr.bend0 = state.bend;
     noteWrap.classList.add('bending');
@@ -1029,12 +1030,14 @@ function setFold(on) {
     phys.foldT = 0;
   }
   $('foldBtn').setAttribute('aria-pressed', on);
+  if (on && state.bend !== 0) { state.bend = 0; bendSlider.value = 0; }   // fold and bend exclude each other
   if (on && state.exploded) setExploded(false);
   kick();
 }
 $('foldBtn').addEventListener('click', () => setFold(phys.foldT === 0));
 bendSlider.addEventListener('input', () => {
   if (state.exploded) setExploded(false);
+  if (phys.foldT !== 0) setFold(false);            // bending undoes a fold
   state.bend = +bendSlider.value;
   kick();
 });

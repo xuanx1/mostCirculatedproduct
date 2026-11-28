@@ -60,7 +60,8 @@ MODE = {
     ('front', 'declaration'):   ('script', 0),       # brown script, minus the bell, serial and 100 over it
 }
 SKIP = {('front', 'watermark'), ('back', 'watermark'),   # the watermark is rebuilt from the portrait
-        ('front', 'frb-seal')}                           # the public-domain vector seal (tools/vector_seal.py)
+        ('front', 'frb-seal'),                           # the public-domain vector seal (tools/vector_seal.py)
+        ('back', 'gold-100')}                            # cut by tools/gold100.py
 CLIP = {('front', 'ovi-100')}
 # the two counters of the colour-shifting 100's zeros: (cx, cy, rx, ry) note units, a little larger than each
 OVI_COUNTERS = [(601.5, 270.2, 4.2, 15.0), (649.4, 270.2, 4.4, 15.0)]
@@ -341,9 +342,24 @@ def isolate(im, side, fid, shape, g):
         n_, lab_cc, st_, _ = cv2.connectedComponentsWithStats(gm, 8)
         if n_ > 1:                                   # the feather is one piece
             gm = ((lab_cc == 1 + int(np.argmax(st_[1:, cv2.CC_STAT_AREA]))) * 255).astype(np.uint8)
-        hole = (foreign & (gm > 0)).astype(np.uint8) * 255
+        # the upper feather is convex: big outlined letters over its edge leave notches; close them with
+        # the hull of the upper part and rebuild what was under the letters from the gold around it
+        rows = (np.arange(gm.shape[0]) / sy + wy0) < 195
+        upper = gm.copy(); upper[~rows] = 0
+        pts = cv2.findNonZero(upper)
+        added = np.zeros_like(gm)
+        if pts is not None:
+            cv2.fillConvexPoly(added, cv2.convexHull(pts), 255)
+            added[~rows] = 0
+            added = cv2.bitwise_and(added, cv2.bitwise_not(gm))
+            gm = cv2.bitwise_or(gm, added)
+        hole = ((foreign & (gm > 0)) | (added > 0)).astype(np.uint8) * 255
         rgb = cv2.cvtColor(cv2.inpaint(cv2.cvtColor(rgb, cv2.COLOR_RGB2BGR), hole, 5, cv2.INPAINT_TELEA), cv2.COLOR_BGR2RGB)
-        gm = cv2.morphologyEx(gm, cv2.MORPH_OPEN, disk(0.4 * s_avg))
+        gm = cv2.morphologyEx(gm, cv2.MORPH_OPEN, disk(1.2 * s_avg))          # ragged bits of script/inkwell
+        n_, lab_cc, st_, _ = cv2.connectedComponentsWithStats(gm, 8)
+        if n_ > 1:
+            gm = ((lab_cc == 1 + int(np.argmax(st_[1:, cv2.CC_STAT_AREA]))) * 255).astype(np.uint8)
+        gm = ((cv2.GaussianBlur(gm.astype(np.float32), (0, 0), 1.0 * s_avg) > 127) * 255).astype(np.uint8)   # smooth edge
         cut = strokes = gm
     elif mode == 'shape':
         cut = (seed * 255).astype(np.uint8)

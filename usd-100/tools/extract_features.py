@@ -177,8 +177,9 @@ def colour_to_alpha(rgb, paper, dark_only=False):
     return Image.fromarray(out, 'RGBA')
 
 
-GHOST_BOX = (633, 145, 52, 96)     # front watermark: the blank oval right of the portrait (cx, cy, rx, ry)
+GHOST_BOX = (653, 121, 40, 55)     # front watermark: the blank oval right of the portrait (cx, cy, rx, ry)
 PORTRAIT = (270, 120, 100, 105)     # Franklin's head (the watermark is the same face)
+PORTRAIT_HEAD = (186, 33, 366, 280)   # x0, y0, x1, y1: head and shoulders, for the watermark (proportions kept)
 
 
 def make_ghost(front, out_w, out_h, feather_px):
@@ -188,12 +189,17 @@ def make_ghost(front, out_w, out_h, feather_px):
     fading out at the edges."""
     W, H = front.size
     sx, sy = W / VB_W, H / VB_H
-    cx, cy, rx, ry = PORTRAIT
-    src = front.crop((int((cx - rx) * sx), int((cy - ry) * sy), int((cx + rx) * sx), int((cy + ry) * sy)))
-    g = src.convert('L').resize((out_w, out_h), Image.LANCZOS)
+    x0, y0, x1, y1 = PORTRAIT_HEAD
+    src = front.crop((int(x0 * sx), int(y0 * sy), int(x1 * sx), int(y1 * sy))).convert('L')
+    # keep the face's proportions: scale to the frame's width, centre it, pad with paper (no stretching)
+    k = out_w / src.width
+    src = src.resize((out_w, round(src.height * k)), Image.LANCZOS)
+    g = Image.new('L', (out_w, out_h), 255)
+    g.paste(src.crop((0, 0, out_w, min(src.height, out_h))), (0, max(0, out_h - src.height)))   # shoulders at the frame's foot: the oval fade hides the cut
     # engraving lines -> continuous tone
     g = g.filter(ImageFilter.GaussianBlur(max(2.0, out_w / 160)))
     a = np.asarray(g, np.float32)
+    top = max(0, out_h - src.height)                    # where the portrait starts: fade in from there
     paper = np.percentile(a, 97)
     t = np.clip((paper - a) / max(paper - np.percentile(a, 2), 1), 0, 1) ** 0.85
     # elliptical vignette so it melts into the paper
@@ -201,7 +207,7 @@ def make_ghost(front, out_w, out_h, feather_px):
     d = np.sqrt(((xx - out_w / 2) / (out_w / 2)) ** 2 + ((yy - out_h / 2) / (out_h / 2)) ** 2)
     fade = np.clip((1.0 - d) / (feather_px / (min(out_w, out_h) / 2)), 0, 1)
     fade = fade * fade * (3 - 2 * fade)
-    alpha = t * fade
+    alpha = t * fade * np.clip((yy - top + 0.06 * out_h) / (0.12 * out_h), 0, 1)
     col = np.empty((out_h, out_w, 3), np.float32)
     col[...] = (96, 78, 58)
     return Image.fromarray(np.dstack([col, alpha * 255]).astype(np.uint8), 'RGBA')
@@ -343,7 +349,7 @@ def main():
     # screen-size copy for the page: drawn over the artwork's own ghost
     os.makedirs(os.path.join(ROOT, 'assets'), exist_ok=True)
     # (same box as the exploded-view watermark layer: 23,106,148,168 note units)
-    g_page = make_ghost(front, int(110 * 2 * 1.5), int(200 * (612 / 320) * 1.5), feather_px=FEATHER * 3 * 2)   # page box 110 x 200 note units
+    g_page = make_ghost(front, int(80 * 2 * 1.5), int(110 * (612 / 320) * 1.5), feather_px=FEATHER * 3 * 2)   # page box 80 x 110 note units (the head's own proportions)
     os.makedirs(LAYER_DIR, exist_ok=True)
     g_page.save(os.path.join(LAYER_DIR, 'watermark-ghost.png'), optimize=True)
     globals()['_GHOST_PAGE'] = g_page

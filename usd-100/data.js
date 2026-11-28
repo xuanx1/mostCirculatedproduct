@@ -32,8 +32,8 @@ const FEATURES = [
     desc:'A faint image of Benjamin Franklin formed in the paper itself, in the blank space to the right of the portrait. Hold the note to light to see it; it is visible from both sides of the note.',
     how:'Hold the note up to a light. A <b>faint Franklin</b> should appear in the blank space to the right of the portrait, from either side.',
     markers:[
-      { side:'front', x:633, y:145, ring:32, label:'Watermark', outline:{shape:'ellipse', cx:633, cy:145, rx:55, ry:100} },
-      { side:'back',  x:95,  y:160, ring:32, label:'Watermark (reverse)', outline:{shape:'ellipse', cx:95, cy:160, rx:62, ry:86} },
+      { side:'front', x:653, y:121, ring:30, label:'Watermark', outline:{shape:'ellipse', cx:653, cy:121, rx:40, ry:55} },
+      { side:'back',  x:67,  y:121, ring:30, label:'Watermark (reverse)', outline:{shape:'ellipse', cx:67, cy:121, rx:40, ry:55} },
     ],
     icon:'<circle cx="8" cy="8" r="5"/><path d="M3 14c1-2 3-3 5-3s4 1 5 3"/>'
   },
@@ -128,7 +128,7 @@ const FEATURES = [
     icon:'<circle cx="4" cy="8" r="1.5"/><circle cx="8" cy="4" r="1.5"/><circle cx="12" cy="8" r="1.5"/><circle cx="10" cy="12" r="1.5"/><circle cx="5" cy="12" r="1.5"/>'
   },
   {
-    id:'declaration', name:'Declaration of Independence', short:'Text from the Declaration, right of the portrait',
+    id:'declaration', name:'Declaration text', short:'Text from the Declaration, right of the portrait',
     color:'#9a6a2a', color2:'#d4a866',
     desc:'Lines from the Declaration of Independence run across the right side of the front, in fine script, with the date July 4, 1776 and the words “States of America”. The golden quill lies across them. It is a design element of the note rather than one of the security features uscurrency.gov lists, but its fine script is hard to reproduce cleanly.',
     how:'Look to the right of the portrait. The script should be sharp and readable, for example “…political bands which have connected them with another…”.',
@@ -141,7 +141,7 @@ const FEATURES = [
 // watermark inside it) is the core; the reverse is printed on one side and the obverse on the other.
 const LAYERS = [
   { id:'r-gold',     name:'Large gold 100',   group:'Reverse', side:'back',  feature:'gold100',   kind:'pieces',
-    pieces:[ ['back-gold-100', 569,33,120,236] ] },
+    pieces:[ ['back-gold-100', 566,34,122,246] ] },
   { id:'r-intaglio', name:'Intaglio ink',     group:'Reverse', side:'back',  feature:'intaglio',  kind:'pieces',
     pieces:[ ['back-hall', 91,44,486,220], ['back-motto', 255,53,232,36] ] },
   { id:'r-offset',   name:'Offset print',     group:'Reverse', side:'back',  feature:'fineline',  kind:'art' },
@@ -151,7 +151,7 @@ const LAYERS = [
     pieces:[ ['front-ribbon-cut', 367,0,39,320] ] },
   { id:'substrate',  name:'Cotton-linen paper', group:'Paper', side:'front', feature:null,        kind:'paper', core:true },
   { id:'watermark',  name:'Watermark',        group:'Paper',   side:'front', feature:'watermark', kind:'pieces',
-    pieces:[ ['watermark-ghost', 578,45,110,200] ] },
+    pieces:[ ['watermark-ghost', 613,66,80,110] ] },
   { id:'offset',     name:'Offset print',     group:'Obverse', side:'front', feature:'fineline',  kind:'art' },
   { id:'intaglio',   name:'Intaglio ink',     group:'Obverse', side:'front', feature:'intaglio',  kind:'pieces',
     pieces:[ ['front-portrait', 104,10,276,286], ['front-frb-seal', 80,112,78,81.4] ] },
@@ -174,18 +174,18 @@ const GLOW = {
   ribbon:    [ P('front','front-ribbon',367,0,39,320) ],
   bell:      [ P('front','front-bell',409,194,82,94) ],
   ovi:       [ P('front','front-ovi-100',541,239,138,54) ],
-  watermark: [ P('front','watermark-ghost',578,45,110,200), P('back','watermark-ghost',33,74,124,172,true) ],
+  watermark: [ P('front','watermark-ghost',613,66,80,110), P('back','watermark-ghost',27,66,80,110,true) ],   // in the blank oval; the back mirrors it
   thread:    [ P('front','front-thread',152,0,15,320) ],
   intaglio:  [ P('front','front-portrait',104,10,276,286) ],
   fineline:  [ P('front','front-portrait',104,10,276,286), P('back','back-hall',91,44,486,220) ],
   microprint:[ P('front','front-quill',360,34,256,266) ],
-  gold100:   [ P('back','back-gold-100',569,33,120,236) ],
+  gold100:   [ P('back','back-gold-100',566,34,122,246) ],
   serial:    [ P('front','front-serial-left',25,57,173,31), P('front','front-serial-right',495,202,203,33) ],
   frb:       [ P('front','front-frb-seal',80,112,78,81.4), P('front','front-fed-indicator',24,87,42,32) ],
   treasury:  [ P('front','front-treasury-seal',503,94,96,96) ],
   signature: [ P('front','front-signatures',23,188,128,82) ],
   eurion:    [ P('front','front-eurion',20,82,176,122), P('back','back-eurion-tl',112,46,120,58), P('back','back-eurion-tr',470,46,102,60) ],
-  declaration:[ P('front','front-declaration',362,104,344,200) ],
+  declaration:[ P('front','front-declaration',362,104,344,200), P('front','front-quill',366,28,250,270) ],
 };
 
 // Detail callouts shown when a feature is zoomed into: [side, [[x, y], ...], label] in note units.
@@ -194,7 +194,7 @@ const DETAILS = {
               ['front', [[386, 260]], 'Moves at right angles to the tilt']],
   bell:      [['front', [[450, 215]], 'Copper inkwell'], ['front', [[450, 245]], 'Bell: copper to green']],
   ovi:       [['front', [[570, 266]], 'Copper face-on'], ['front', [[650, 266]], 'Green when tilted']],
-  watermark: [['front', [[633, 110]], 'Franklin, in the paper'], ['front', [[633, 230]], 'Seen only against the light'],
+  watermark: [['front', [[653, 95]], 'Franklin, in the paper'], ['front', [[653, 170]], 'Seen only against the light'],
               ['back', [[95, 160]], 'Visible from the back too']],
   thread:    [['front', [[159, 60]], 'USA and 100, alternating'], ['front', [[159, 200]], 'Glows pink under UV']],
   intaglio:  [['front', [[170, 265]], 'Shoulder: rough to the touch'], ['front', [[300, 270]], 'Raised ink']],
