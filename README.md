@@ -1,10 +1,8 @@
-# Most Circulated Product: banknote security features
+# [Most Circulated Product](https://xuanx1.github.io/mostCirculatedproduct/)
 
-Interactive, educational explorers of the security features on the highest-denomination banknote of each of the ten most traded currencies (by the BIS Triennial Central Bank Survey of foreign exchange turnover). Tilt, flip, bend, fold, explode into layers and view under ultraviolet light, with every feature labelled and explained.
+Interactive, educational [explorers](https://xuanx1.github.io/mostCirculatedproduct/) of the security features on the highest-denomination banknote of each of the ten most traded currencies (by the BIS Triennial Central Bank Survey of foreign exchange turnover). Tilt, flip, bend, fold, explode into layers and view under ultraviolet light, with every feature labelled and explained.
 
-Landing page: [xuanx1.github.io/mostCirculatedproduct](https://xuanx1.github.io/mostCirculatedproduct/)
-
-| Currency | Note | Live page | Folder |
+| Currency | Note | Live page | Preview |
 |---|---|---|---|
 | US dollar | $100 Federal Reserve note (Series 2021) | [usd-100](https://xuanx1.github.io/mostCirculatedproduct/usd-100/) | [`usd-100/`](usd-100/) |
 | Euro | €500 (first series) ¹ | [eur-500](https://xuanx1.github.io/mostCirculatedproduct/eur-500/) | [`eur-500/`](eur-500/) |
