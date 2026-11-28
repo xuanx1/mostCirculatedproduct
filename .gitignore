@@ -1,12 +1,17 @@
-# large editing files: the pages don't need them (GitHub rejects files over 100 MB)
+# Only the files the catalogue pages load are committed.
+# Working material stays local: source scans, intermediates, crops and build tools.
+**/source/
+**/feature-crops/
+**/tools/
+tools/
+*.npy
 *.psd
 .backup-*/
-**/source/previous/
-**/source/*-esrgan-x2.png
 
 # build caches
 __pycache__/
 *.pyc
 assets/masks/
+**/assets/masks/
 .DS_Store
 Thumbs.db

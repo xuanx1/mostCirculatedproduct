@@ -75,7 +75,13 @@ How each cut-out is made (`tools/extract_chf.py`):
 - **Artwork: the SNB's own images.** Wikimedia Commons has the ninth-series 1000-franc note only at 345 × 778 px ([front](https://commons.wikimedia.org/wiki/File:CHF_1000_9_front.jpg), [back](https://commons.wikimedia.org/wiki/File:CHF_1000_9_back.jpg)). Both files credit the Swiss National Bank and designer Manuela Pfrunder and are marked public domain, with a currency restriction. They are too small for this page, so it uses the larger specimen images the SNB publishes on its series page, [snb.ch: Banknotes, series 9](https://www.snb.ch/en/the-snb/mandates-goals/cash/series-9):
   - `banknote_widget_series_9_design_denomination_1000_front.n.jpg`, 827 × 1866 (from `snb.ch/dam/jcr:778b68b3-…`)
   - `…_1000_back.n.jpg`, 827 × 1866 (from `snb.ch/dam/jcr:0b7471d0-…`)
-  - Both are Hasselblad photographs with the SPECIMEN overprint, kept in `source/`. Design: Manuela Pfrunder; © Swiss National Bank.
+  - Both are Hasselblad photographs with a translucent SPECIMEN overprint (originals kept in `source/`). Design: Manuela Pfrunder; © Swiss National Bank.
+  - **The overprint has been removed** (it is a translucent grey film that darkens the print under it):
+    1. `tools/remove_specimen.py`, `tools/restore_detail.py`: a first LaMa pass and detail restore, used only as a starting point.
+    2. `tools/unblend_all.py --preview`, `tools/glyph_fit.py`, `tools/template_fit.py`: the overprint's exact letter shapes. Its darkening is measured pixel by pixel; the typeface is Corbel; the back's clean S, P, E, C, I are used as stencils on both sides, and bold Corbel for M and N.
+    3. `tools/unblend_all.py`: inside each letter the original's own fine detail is kept and only its brightness is matched to the print around it, so what is under the letters (the hands' engraving, both bank names, the serial 17C6215816) is the real print; a 4–7 px band along each letter's edge is filled by LaMa, and letter ends the fit missed are added and treated the same way.
+    4. `tools/fix_slivers.py`, `tools/fix_rim.py`: two slivers by "Mille Franchi" and the overprint's light rim along its letters' upper-left edges.
+  - Measured result: the letters' contrast against the print around them fell from 0.28 to 0.03 (front) and 0.31 to 0.02 (back). What remains up close: faint light lines along some letter edges, most visible on the "M" across the fingers. The handshake cut-out's wrists fade out (`tools/hand_wrists.py`).
 - **Feature facts, positions (A to E) and the UV photograph:** the SNB brochure [*The new 1000-franc note*](https://www.snb.ch/dam/jcr:8d5b56a1-54c4-4a95-83f4-5429fea8b7be/nb_1000.en.pdf) (2019), pages 8 to 11; copy in `source/found/`. Also [snb.ch, series 9](https://www.snb.ch/en/the-snb/mandates-goals/cash/series-9) and the [downloads page](https://www.snb.ch/en/the-snb/mandates-goals/cash/downloads).
 - **Open-network background:** the illustration on page 6 of the same SNB brochure.
 - **Fonts**, all under the SIL Open Font License 1.1 and bundled in `fonts/`:
@@ -89,7 +95,7 @@ How each cut-out is made (`tools/extract_chf.py`):
 From the SNB's [Instruction sheet on the reproduction of banknotes](https://www.snb.ch/dam/jcr:7ab35b8a-2bd5-4ad7-8255-52711da841ac/instr_rep_notes.en.pdf) (30 August 2017), which covers the ninth series, and the [reproduction page](https://www.snb.ch/en/the-snb/mandates-goals/cash/reproduction):
 
 - **The law:** reproducing banknotes in a way that risks confusion with genuine notes is an offence under art. 243 of the Swiss Criminal Code.
-- **SPECIMEN:** the SNB generally sees no risk of confusion when the word SPECIMEN is printed diagonally across the reproduction, at least 75 % of its length and 15 % of its width, in a clearly contrasting colour. The SNB images used here carry that overprint, and it is kept everywhere, including in the cut-outs.
+- **SPECIMEN:** the SNB generally sees no risk of confusion when the word SPECIMEN is printed diagonally across the reproduction, at least 75 % of its length and 15 % of its width, in a clearly contrasting colour. The SNB images carry that overprint, but it has been removed here at the project owner's request, so this condition is not met as the page stands: check with the SNB before publishing.
 - **One further condition** must also be met, for example:
   - a reduced size whose length is at most 66 % of the original, or an enlarged one of at least 150 %;
   - a partial reproduction of less than 40 % of one side;

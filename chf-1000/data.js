@@ -101,7 +101,7 @@ const FEATURES = [
   {
     id:'serial', name:'Serial number', short:'Printed twice on the back, in two fonts',
     color:'#2c3e70', color2:'#7d8fc4', light:false,
-    desc:'An identical number, consisting of one letter and nine numbers, is printed on the back of the note in two places, in different fonts. On this specimen both read 17C6215816.',
+    desc:'An identical number, consisting of one letter and nine numbers, is printed on the back of the note in two places, in different fonts. On this note both read 17C6215816.',
     how:'Examine the back: the serial number appears <b>in two places, in different fonts</b>, and both must be <b>identical</b>.',
     markers:[
       { side:'back', x:285, y:280, ring:14, label:'Serial (right)', outline:{shape:'rect', x:274, y:204, w:22, h:150, rx:2} },

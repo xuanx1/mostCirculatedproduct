@@ -51,8 +51,13 @@ and press *Look at a small light through it* to see the circle of 100s.
   says only that the note is "a single piece of polymer with some transparent areas".
 - **Gold flow:** a highlight sweep through the portrait's and the researcher's line-work.
 - **Artwork:** upscaled with Real-ESRGAN (`tools/upscale.py`). The upscaler sharpens line-work but
-  cannot recover microprint the 1000 px source never had. These are the Bank's specimen images, so they
-  carry its *SPECIMEN* overprint, which also lies across some cut-outs (portrait, researcher, ECG).
+  cannot recover microprint the 1000 px source never had. These are the Bank's specimen images, which
+  carry a translucent *SPECIMEN* overprint on each side. It has been removed with **LaMa** inpainting
+  (`tools/remove_specimen.py`): each letter is masked on its own and LaMa fills it from the print around it. On
+  the front most of the word lies over the sepia portrait, so the letter shapes there are taken from the back
+  (the same lettering, found cleanly on the orange paper) and fitted onto the front. The untouched images are
+  kept as `source/<side>-working-specimen.png`. Under the former letters the portrait's tones and the
+  background print are LaMa's reconstruction, not the original.
 
 ## Files
 
@@ -104,5 +109,5 @@ From the Bank of Canada's [Using bank note images](https://www.bankofcanada.ca/b
   altered.
 - **For this page:** it upscales, recolours and cuts the images apart, which goes beyond "without
   alteration". Check with the Bank (through its [reproduction request](https://www.bankofcanada.ca/banknotes/using-bank-note-images/submit-a-bank-note-image-reproduction-request/))
-  before you publish it. The specimen images keep their SPECIMEN overprint. Printing or saving the page
+  before you publish it. Removing the SPECIMEN overprint is a further alteration of the Bank's images. Printing or saving the page
   as a PDF covers the note with the EURion constellation.

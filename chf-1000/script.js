@@ -764,7 +764,7 @@ function renderDetail() {
         <div><dt>Back</dt><dd>Parliament and an open network<small>Tausend Franken · Milli Francs</small></dd></div>
         <div><dt>Substrate</dt><dd>Durasafe®, three layers<small>paper, polymer, paper</small></dd></div>
         <div><dt>Colour</dt><dd>Purple</dd></div>
-        <div><dt>Size</dt><dd>70 × 158 mm<small>this page shows the specimen published by the SNB</small></dd></div>
+        <div><dt>Size</dt><dd>70 × 158 mm<small>from the SNB's published images</small></dd></div>
       </dl>
 `) + `
       <ul class="gestures">

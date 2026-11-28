@@ -1439,6 +1439,12 @@ function fitIntro() {
 }
 function runIntro() {
   const B = document.body;
+  if (B.classList.contains('switch-in')) {           // came from another bank: no cover, the note slides in
+    B.classList.add('intro-settle');                  // no labels while the note is moving
+    computeFit(); applyTransform(true);
+    setTimeout(() => { B.classList.remove('switch-in', 'switch-L', 'switch-R', 'intro-settle'); computeFit(); applyTransform(); }, 750);
+    return;
+  }
   const steps = [];
   const at = (ms, fn) => steps.push(setTimeout(fn, ms));
   const off = () => { window.removeEventListener('pointerdown', skip, true); window.removeEventListener('keydown', skip, true); };
@@ -1471,3 +1477,21 @@ applyUv(true);                         // build the (hidden) UV layers up front
 setupTweaks();
 computeFit();
 syncUI();
+
+/* Issuer switcher: the three HK$1,000 pages (HSBC, Standard Chartered, Bank of China) in a row. Clicking another
+   bank slides this note out toward the side it lies on; the next page skips its cover and slides its note in. */
+(() => {
+  const ORDER = ['hkd-1000', 'hkd-1000-scb', 'hkd-1000-boc'];
+  const here = ORDER.indexOf(location.pathname.replace(/\/index\.html$/, '').replace(/\/$/, '').split('/').pop());
+  document.querySelectorAll('.issuers a').forEach(a => a.addEventListener('click', e => {
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.button) return;
+    const to = ORDER.indexOf(a.getAttribute('href').split('/').slice(-2)[0]);
+    if (to < 0 || here < 0) return;
+    e.preventDefault();
+    const pre = document.createElement('link'); pre.rel = 'prefetch'; pre.href = a.href; document.head.appendChild(pre);
+    const fromRight = to > here;                       // the next bank lies to the right: it comes in from the right
+    sessionStorage.setItem('hkd-switch', fromRight ? 'R' : 'L');
+    document.body.classList.add('switch-out', fromRight ? 'switch-out-L' : 'switch-out-R');
+    setTimeout(() => { location.href = a.href; }, reduceMotion ? 0 : 380);
+  }));
+})();

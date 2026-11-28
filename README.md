@@ -6,16 +6,16 @@ Interactive, educational [explorers](https://xuanx1.github.io/mostCirculatedprod
 
 | Currency | Note | Live page | Preview |
 |---|---|---|---|
-| US dollar | $100 Federal Reserve note (Series 2021) | [usd-100](https://xuanx1.github.io/mostCirculatedproduct/usd-100/) | [`usd-100/`](usd-100/) |
-| Euro | €500 (first series) ¹ | [eur-500](https://xuanx1.github.io/mostCirculatedproduct/eur-500/) | [`eur-500/`](eur-500/) |
-| Japanese yen | ¥10,000 (2024 series, Shibusawa Eiichi) | [jpy-10000](https://xuanx1.github.io/mostCirculatedproduct/jpy-10000/) | [`jpy-10000/`](jpy-10000/) |
-| Pound sterling | £50 Bank of England polymer (Alan Turing; Queen Elizabeth II version) ³ | [gbp-50](https://xuanx1.github.io/mostCirculatedproduct/gbp-50/) | [`gbp-50/`](gbp-50/) |
-| Chinese renminbi | ¥100 (2015 edition) ⁴ | [cny-100](https://xuanx1.github.io/mostCirculatedproduct/cny-100/) | [`cny-100/`](cny-100/) |
-| Swiss franc | CHF 1000 (ninth series, 2019) | [chf-1000](https://xuanx1.github.io/mostCirculatedproduct/chf-1000/) | [`chf-1000/`](chf-1000/) |
-| Australian dollar | $100 (next generation polymer, 2020) | [aud-100](https://xuanx1.github.io/mostCirculatedproduct/aud-100/) | [`aud-100/`](aud-100/) |
-| Canadian dollar | $100 (Frontier polymer, 2011) | [cad-100](https://xuanx1.github.io/mostCirculatedproduct/cad-100/) | [`cad-100/`](cad-100/) |
-| Hong Kong dollar | HK$1,000 (2018 series) ², by each of its three issuing banks: HSBC, Standard Chartered, Bank of China (Hong Kong) | [HSBC](https://xuanx1.github.io/mostCirculatedproduct/hkd-1000/) · [Standard Chartered](https://xuanx1.github.io/mostCirculatedproduct/hkd-1000-scb/) · [Bank of China](https://xuanx1.github.io/mostCirculatedproduct/hkd-1000-boc/) | [`hkd-1000/`](hkd-1000/), [`hkd-1000-scb/`](hkd-1000-scb/), [`hkd-1000-boc/`](hkd-1000-boc/) |
-| Singapore dollar | S$10,000 (Portrait Series) ¹ | [sgd-10000](https://xuanx1.github.io/mostCirculatedproduct/sgd-10000/) | [`sgd-10000/`](sgd-10000/) |
+| US dollar | $100 Federal Reserve note (Series 2021) | [usd-100](https://xuanx1.github.io/mostCirculatedproduct/usd-100/) | <img width="1920" height="915" alt="usd-100 page" src="previews/usd-100.jpg" /> |
+| Euro | €500 (first series) ¹ | [eur-500](https://xuanx1.github.io/mostCirculatedproduct/eur-500/) | <img width="1920" height="915" alt="eur-500 page" src="previews/eur-500.jpg" /> |
+| Japanese yen | ¥10,000 (2024 series, Shibusawa Eiichi) | [jpy-10000](https://xuanx1.github.io/mostCirculatedproduct/jpy-10000/) | <img width="1920" height="915" alt="jpy-10000 page" src="previews/jpy-10000.jpg" /> |
+| Pound sterling | £50 Bank of England polymer (Alan Turing; Queen Elizabeth II version) ³ | [gbp-50](https://xuanx1.github.io/mostCirculatedproduct/gbp-50/) | <img width="1920" height="915" alt="gbp-50 page" src="previews/gbp-50.jpg" /> |
+| Chinese renminbi | ¥100 (2015 edition) ⁴ | [cny-100](https://xuanx1.github.io/mostCirculatedproduct/cny-100/) | <img width="1920" height="915" alt="cny-100 page" src="previews/cny-100.jpg" /> |
+| Swiss franc | CHF 1000 (ninth series, 2019) | [chf-1000](https://xuanx1.github.io/mostCirculatedproduct/chf-1000/) | <img width="1920" height="915" alt="chf-1000 page" src="previews/chf-1000.jpg" /> |
+| Australian dollar | $100 (next generation polymer, 2020) | [aud-100](https://xuanx1.github.io/mostCirculatedproduct/aud-100/) | <img width="1920" height="915" alt="aud-100 page" src="previews/aud-100.jpg" /> |
+| Canadian dollar | $100 (Frontier polymer, 2011) | [cad-100](https://xuanx1.github.io/mostCirculatedproduct/cad-100/) | <img width="1920" height="915" alt="cad-100 page" src="previews/cad-100.jpg" /> |
+| Hong Kong dollar | HK$1,000 (2018 series) ², by each of its three issuing banks: HSBC, Standard Chartered, Bank of China (Hong Kong) | [HSBC](https://xuanx1.github.io/mostCirculatedproduct/hkd-1000/) · [Standard Chartered](https://xuanx1.github.io/mostCirculatedproduct/hkd-1000-scb/) · [Bank of China](https://xuanx1.github.io/mostCirculatedproduct/hkd-1000-boc/) | <img width="1920" height="915" alt="hkd-1000 page" src="previews/hkd-1000.jpg" /> <img width="1920" height="915" alt="hkd-1000-scb page" src="previews/hkd-1000-scb.jpg" /> <img width="1920" height="915" alt="hkd-1000-boc page" src="previews/hkd-1000-boc.jpg" /> |
+| Singapore dollar | S$10,000 (Portrait Series) ¹ | [sgd-10000](https://xuanx1.github.io/mostCirculatedproduct/sgd-10000/) | <img width="1920" height="915" alt="sgd-10000 page" src="previews/sgd-10000.jpg" /> |
 
 ¹ Still legal tender but no longer issued: the €500 since 2019, the S$10,000 since 2014. They remain the highest denominations of their currencies.
 ² Hong Kong notes are issued by three banks (HSBC, Standard Chartered, Bank of China), each with its own design. All three are here, with a switcher between them on each page.

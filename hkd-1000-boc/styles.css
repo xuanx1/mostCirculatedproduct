@@ -945,12 +945,30 @@ body.uv input[type=range]::-webkit-slider-thumb{background:#c9a8ff;border-color:
 body.uv .backdrop-art{opacity:.06;filter:grayscale(1) invert(1);mix-blend-mode:screen}
 @media print{ .backdrop-art{display:none} }
 
-/* the three issuing banks of the HK$1,000: one page each, switched here */
-.issuers{display:flex;gap:4px;margin:-2px 0 12px;font-family:var(--sans);font-size:10.5px;font-weight:600;
-  letter-spacing:.14em;text-transform:uppercase}
-.issuers > *{padding:4px 9px;border-radius:99px;border:1px solid var(--hair-2);color:var(--ink-3);text-decoration:none;
-  transition:color .2s, border-color .2s, background .2s}
-.issuers a:hover, .issuers a:focus-visible{color:var(--ink);border-color:var(--ink-3)}
-.issuers .on{color:var(--gold);border-color:currentColor}
-body.uv .issuers > *{border-color:rgba(240,234,255,.24)}
+/* the three issuing banks of the HK$1,000: one page each, switched like the view tabs (text, underline) */
+.issuers{display:flex;gap:22px;margin:2px 0 14px}
+.issuers > *{position:relative;padding:0 0 7px;font-family:var(--sans);font-size:10.5px;font-weight:600;
+  letter-spacing:.2em;text-transform:uppercase;color:var(--ink-3);text-decoration:none;transition:color .2s}
+.issuers > *::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--gold);
+  transform:scaleX(0);transform-origin:left;transition:transform .35s var(--ease)}
+.issuers a:hover, .issuers a:focus-visible{color:var(--ink-2)}
+.issuers a:hover::after{transform:scaleX(.35)}
+.issuers .on{color:var(--ink)}
+.issuers .on::after{transform:none}
 body.intro .issuers{opacity:0}
+
+/* issuer switcher: the note slides between the three banks' pages; the cover is not replayed */
+@keyframes swInL{from{transform:translateX(-55vw);opacity:0}to{transform:none;opacity:1}}
+@keyframes swInR{from{transform:translateX(55vw);opacity:0}to{transform:none;opacity:1}}
+@keyframes swFade{from{opacity:0}to{opacity:1}}
+body.switch-in .intro-cover{display:none}
+body.switch-L .stage{animation:swInL .7s var(--ease) both}
+body.switch-R .stage{animation:swInR .7s var(--ease) both}
+body.switch-in .col, body.switch-in .anno-layer, body.switch-in .brand h1, body.switch-in .strap{animation:swFade .6s var(--ease) .15s both}
+body.switch-out .stage{transition:transform .38s cubic-bezier(.5,0,.75,0), opacity .38s ease-in}
+body.switch-out-L .stage{transform:translateX(-55vw);opacity:0}
+body.switch-out-R .stage{transform:translateX(55vw);opacity:0}
+body.switch-out .col, body.switch-out .anno-layer, body.switch-out .brand h1, body.switch-out .strap{transition:opacity .3s;opacity:0}
+@media (prefers-reduced-motion: reduce){ body.switch-in .stage, body.switch-in .col{animation:none} }
+
+/* switching banks: no white frame between pages (index.html paints the page colour first) */
